@@ -1,0 +1,161 @@
+@extends('layouts.master')
+@section('content')
+  <div class="row-fluid">
+    <div class="span12 offset3">
+      <div class="widget-box">
+        <div class="widget-title widget-form-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+          <h5>Add Invertory Item For Sale</h5>
+          
+        </div>
+        <div class="widget-content">
+          @foreach($errors->all() as $err)
+            <div class="alert alert-danger">
+              {{$err}}
+            </div>
+          @endforeach
+
+          <form method="post" class="form-horizontal" enctype="multipart/form-data" action="<?php echo isset($sales_data[0])?__setLink('inventory/sales/update',array('id'=>$sales_data[0]['sales_id'])):__setLink('inventory/sales/save'); ?>">
+            {{ csrf_field() }}
+
+             <div class="span12">
+            
+             
+               <div class="control-group">
+                <label class="control-label span4" style="padding-left:3px">Item </label>
+                <div class="controls span8" style="margin-left:39px !important">
+                  <select name="item_name_id" id="selItem">
+                    <option value=""></option>
+                   <?php   foreach($itemname_data as $item){ ?>
+                      <option value="{{$item->item_name_id}}">{{$item->item_name}}</option>
+                   <?php } ?>
+                  </select>
+                  
+                </div>
+              </div>
+              </div>
+
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label span4">Quantity</label>
+                <div class="controls span8" style="margin-left:17px !important">
+                  <input type="text" name="quantity" id="quantity" placeholder="Enter quantity" class="span12 m-wrap" value="<?php echo isset($sales_data)?$sales_data[0]['quantity']:""; ?>">
+                </div>
+              </div>          
+              </div>
+
+              
+                <div class="span12">
+              <div class="control-group">
+                <label class="control-label span4">Total Price </label>
+                <div class="controls span8" style="margin-left:4px !important">
+                  <input type="text" name="price" id="price" placeholder="Enter price" class="span12 m-wrap" value="<?php echo isset($sales_data)?$sales_data[0]['price']:""; ?>">
+                </div>
+              </div>
+
+
+                <input type="hidden" name="rate" id="rate" class="span12 m-wrap" value="<?php echo isset($sales_data)?$sales_data[0]['rate']:""; ?>">
+
+                 <input type="hidden" name="vendor_id" id="vendor" class="span12 m-wrap" value="<?php echo isset($sales_data)?$sales_data[0]['vendor_id']:""; ?>">
+               
+              </div>
+              <div class="span12">
+                @include('common.class_section')
+              </div>
+                 <div class="span12">
+            
+             
+               <div class="control-group">
+                <label class="control-label span4">Sold To </label>
+                <div class="controls span8" style="margin-left:21px !important">
+                  <select name="sold_to" id="selStudent">
+                    <option value="">  </option>
+                  
+                  </select>
+                  
+                </div>
+              </div>
+              </div>
+                 <div class="span12">
+              <div class="control-group">
+                <label class="control-label span4">Narration </label>
+                <div class="controls span8">
+                   <textarea type="text"  name="description" class="span12 m-wrap"><?php echo isset($sales_data)?$sales_data[0]['description']:""; ?></textarea>
+                </div>
+              </div>
+              </div>
+
+              <div class="span12" style="margin-top:10px !important">
+                <div class="control-group">
+                <label class="control-label span4">Sales Returned ? </label>
+                <div class="controls span1">
+                  <input type="checkbox" name="status"  class="span5 m-wrap" <?php if(isset($sales_data) && $sales_data[0]['status'] == 1){ ?> checked="" <?php }else{ } ?> >
+                </div>
+              </div>
+              </div>
+            <div class="span12" style="margin-top: 10px">
+              <button class="btn btn-success span3 offset4" value="submit" type="submit">Submit</button>
+            </div>
+            
+         </form>
+         <div style="clear:both"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#selItem').on("change",function(){
+        itemid = $('#selItem').val();
+        $.get('/inventory/price/'+itemid+'?token='+'<?php echo getToken(); ?>', function (res) {
+       
+            if(res){
+              data = $.parseJSON(res);
+              $.each(data, function(i,c) {
+                $("#rate").val(c.sell_price);
+                  $("#vendor").val(c.vendor_id); 
+              });
+            }else{
+
+            }  
+    
+        });
+    });  
+});
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#quantity').on("change",function(){
+      quantity=$('#quantity').val();
+      rate=$('#rate').val();
+      price=(quantity * rate);   
+      $('#price').val(price);
+    });
+  });
+
+</script>
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+   
+      $('#ddlSection').on("change",function(){
+        classid = $('#ddlClass').val();
+      sectionid=$('#ddlSection').val();
+      
+      $.get('/student/'+classid+'/'+sectionid+"?token=<?php echo getToken();?>",function(res){
+        if(res){
+          $('#selStudent').empty();
+          data=$.parseJSON(res);
+          $.each(data, function(i,c){
+            $('#selStudent').append("<option value="+c.student_id+">"+c.student_name+"</option>");
+          });
+        }
+      });
+    });
+
+    });
+
+
+</script>
+
+@endSection

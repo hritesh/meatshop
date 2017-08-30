@@ -1,5 +1,5 @@
 <?php
-
+include __DIR__."/../app.helpers/app-functions.php";
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

@@ -276,26 +276,79 @@
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Inventory Manager<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                
+                                
                                 <li>
-                                    <a href="/inventory/itemgroup/_list">ItemGroup</a>
-                                </li>
-                                <li>
-                                    <a href="/inventory/itemname/_list">ItemName</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <a href="#">Item Group<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="/inventory/itemgroup/_list">List</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="/inventory/itemname/_list">ItemName</a>
                                         </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Item Name<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="/inventory/itemname/_list">ItemName</a>
                                         </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Vendor<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Stock<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Purchase<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Purchase Return<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Sales<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Sales Return<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/itemname/_list">ItemName</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -408,6 +461,4 @@
     </div>
     <!-- /#wrapper -->
 
-@include('includes.footer-scripts')  
- </body>
- </html>
+
