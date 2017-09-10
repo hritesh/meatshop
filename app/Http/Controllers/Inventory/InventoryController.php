@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Inventory;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\File;
@@ -34,8 +35,8 @@ class InventoryController extends SecurityController
 						->select('tbl_purchase.*','tbl_item_name.item_name','tbl_vendor.name')
 						->get();
 		foreach ($purchase_data as $key => $value) {
-			$purchase_data[$key]->edit_url= __setLink('inventory/purchase/edit',array('id'=>$value->purchase_id));
-			$purchase_data[$key]->delete_url= __setLink('inventory/purchase/delete',array('id'=>$value->purchase_id));
+			$purchase_data[$key]->edit_url= 'inventory/purchase/edit'.$value->purchase_id;
+			$purchase_data[$key]->delete_url='inventory/purchase/delete',.$value->purchase_id;
 			$purchasedReturnedData = $purchaseReturnObject->getRecordsByPurchaseId($value->purchase_id);
 			if(count($purchasedReturnedData)>0){
 				$purchase_data[$key]->returned_quantity = $purchasedReturnedData->quantity_returned;

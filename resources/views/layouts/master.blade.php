@@ -284,9 +284,7 @@
                                         <li>
                                             <a href="/inventory/itemgroup/_list">List</a>
                                         </li>
-                                        <li>
-                                            <a href="/inventory/itemname/_list">ItemName</a>
-                                        </li>
+                                        
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
@@ -294,7 +292,7 @@
                                     <a href="#">Item Name<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                            <a href="/inventory/itemname/_list">List</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->

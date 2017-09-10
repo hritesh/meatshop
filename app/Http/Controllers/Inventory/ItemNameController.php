@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Inventory;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Session;
-use App\Users;
-use App\ItemGroup;
-use App\ItemName;
+use App\Models\Inventory\Users;
+use App\Models\Inventory\ItemGroup;
+use App\Models\Inventory\ItemName;
 
-class ItemNameController extends SecurityController{
+class ItemNameController extends Controller{
 
 	public function itemnameListJson(){
 
@@ -22,8 +23,8 @@ class ItemNameController extends SecurityController{
 
 			foreach ($itemname_data as $key => $value) {
 			
-			$itemname_data[$key]->edit_url = __setLink('inventory/itemname/edit',array('id'=>$value->item_name_id));
-			$itemname_data[$key]->delete_url =__setLink('inventory/itemname/delete',array('id'=>$value->item_name_id)); 
+			$itemname_data[$key]->edit_url = 'inventory/itemname/edit/'.$value->item_name_id;
+			$itemname_data[$key]->delete_url ='inventory/itemname/delete/'.$value->item_name_id; 
 		} 
 		 header("Content-type:application/json");
 		echo json_encode($itemname_data);
@@ -32,7 +33,7 @@ class ItemNameController extends SecurityController{
 
 	public function _list(){
 		$itemgroup=new ItemGroup;
-		$itemgroup_data=$itemgroup->getAllItemGroup(getSchoolId());
+		$itemgroup_data=$itemgroup->getAllItemGroup();
 		//$itemname=new ItemName;
 		$itemname_data = DB::table('tbl_item_name')->join('tbl_item_group','tbl_item_name.item_group_id','=','tbl_item_group.item_group_id')
 		->select('tbl_item_name.*','tbl_item_group.category')->get();
@@ -42,7 +43,7 @@ class ItemNameController extends SecurityController{
 	
 	public function add(){
 		$itemgroup=new ItemGroup;
-		$itemgroup_data=$itemgroup->getAllItemGroup(getSchoolId());
+		$itemgroup_data=$itemgroup->getAllItemGroup();
 
 		return view('inventory/itemname/add',['itemgroup_data'=>$itemgroup_data]);
 	}
@@ -56,11 +57,10 @@ class ItemNameController extends SecurityController{
 		else{
 			$status=0;
 		}
-		$school_id=getSchoolId();
-		$stat=$itemname->saveItem($request->item_group_id,$request->item_name,$status,$school_id);
+		$stat=$itemname->saveItem($request->item_group_id,$request->item_name,$status);
 		if($stat){
 			if(isset($return_status)){
-				return redirect(__setLink('inventory/purchase/_list'));
+				return redirect('inventory/purchase/_list');
 			}
 			else{
 			echo $stat;
@@ -74,7 +74,7 @@ class ItemNameController extends SecurityController{
 		$itemname=new ItemName;
 		$itemname_data=$itemname->getItemById($id);
 		$itemgroup=new ItemGroup;
-		$itemgroup_data=$itemgroup->getAllItemGroup(getSchoolId());
+		$itemgroup_data=$itemgroup->getAllItemGroup();
 		$itemname_data=$itemname_data->toArray();
 		 header("Content-type:application/json");
 		echo json_encode($itemname_data);
@@ -91,9 +91,9 @@ class ItemNameController extends SecurityController{
 			$status=0;
 		}
 		$id=$_POST['item_name_id'];
-		$school_id=getSchoolId();
 		
-		$stat=$itemname->updateItem($id,$request->item_group_id,$request->item_name,$status,$school_id);
+		
+		$stat=$itemname->updateItem($id,$request->item_group_id,$request->item_name,$status);
 		if($stat){
 			echo $stat;
 			exit;
