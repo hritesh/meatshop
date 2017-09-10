@@ -73,8 +73,8 @@
                                          
                                           
                                           <td class="all-icons">
-                                            <a class="btn btn-primary" onclick="editItem('<?php echo '/inventory/itemname/edit/'.$item->item_name_id?>">Edit</a> 
-                                            <a href="#" type="select" class="btn btn-danger"   onclick="deleteItem('<?php echo'/inventory/itemname/delete/'.$item->item_name_id;?>');"  title="delete">
+                                            <a class="btn btn-primary" onclick="editItem('<?php echo '/inventory/itemname/edit/'.$item->item_name_id?>');">Edit</a> 
+                                            <a  class="btn btn-danger"   onclick="deleteItem('<?php echo'/inventory/itemname/delete/'.$item->item_name_id;?>');" >
                                                     Delete
                                                   </a>
                                           </td>  

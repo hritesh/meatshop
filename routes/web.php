@@ -49,7 +49,7 @@ Route::get('/inventory/itemname/itemjsonlist','Inventory\ItemNameController@item
 	Route::get('/inventory/itemname/add','Inventory\ItemNameController@add');
 	Route::post('/inventory/itemname/save','Inventory\ItemNameController@save');
 	Route::get('/inventory/itemname/edit/{id}','Inventory\ItemNameController@edit');
-	Route::post('/inventory/itemname/update/{id}','Inventory\ItemNameController@update');
+	Route::post('/inventory/itemname/update','Inventory\ItemNameController@update');
 	Route::get('/inventory/itemname/delete/{id}','Inventory\ItemNameController@delete');
 	Route::get('/inventory/itemname/{id}','Inventory\ItemNameController@getItemsbyItemGroupId');
 	

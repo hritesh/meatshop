@@ -63,7 +63,7 @@
                                  
                                   
                                   <td class="all-icons">
-                                      <a onclick="editItem('<?php echo '/inventory/itemgroup/edit/'.$item->item_group_id; ?>');">Edit</a>
+                                      <a onclick="editItem('<?php echo '/inventory/itemgroup/edit/'.$item->item_group_id?>');">Edit</a>
                                     <a type="select"   onclick="deleteItem('<?php echo '/inventory/itemgroup/delete/'.$item->item_group_id?>');"  title="delete">
                                             Delete
                                           </a>
@@ -140,6 +140,7 @@
                     $('#status').attr('checked',false);
                      $('#hdnActionType').val('add');
                     bootbox.alert("Sucessfully Saved");
+                    loadItemList();
                   }else{
                     bootbox.alert('Sorry, Data not saved, try again.');
                   }

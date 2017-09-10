@@ -69,7 +69,7 @@ class ItemNameController extends Controller{
 		}
 	}
 
-	public function edit(){
+	public function edit($id){
 		
 		$itemname=new ItemName;
 		$itemname_data=$itemname->getItemById($id);
@@ -101,7 +101,7 @@ class ItemNameController extends Controller{
 
 	}
 
-	public function delete(){
+	public function delete($id){
 		
 		$itemname=new ItemName;
 		$status=$itemname->deleteItemById($id);
