@@ -36,9 +36,9 @@ Route::get('/inventory/itemname/itemjsonlist','Inventory\ItemNameController@item
 	Route::get('/inventory/sales/_list','Inventory\InventoryController@salesList');
 	Route::get('/inventory/sales/add','Inventory\InventoryController@addSales');
 	Route::post('/inventory/sales/save','Inventory\InventoryController@salesSave');
-	Route::get('/inventory/sales/edit','Inventory\InventoryController@editSales');
+	Route::get('/inventory/sales/edit/{id}','Inventory\InventoryController@editSales');
 	Route::post('/inventory/sales/update','Inventory\InventoryController@salesUpdate');
-	Route::get('/inventory/sales/delete','Inventory\InventoryController@deleteSales');
+	Route::get('/inventory/sales/delete/{id}','Inventory\InventoryController@deleteSales');
 	Route::get('/inventory/price/{itemid}','Inventory\InventoryController@getItemById');
 	Route::get('/inventory/sales/saleslistjson','Inventory\InventoryController@salesListJson');
 	//stock
@@ -67,7 +67,7 @@ Route::get('/inventory/itemname/itemjsonlist','Inventory\ItemNameController@item
 	Route::get('/inventory/vendor/_list','Inventory\VendorController@_list');
 	Route::get('/inventory/vendor/add','Inventory\VendorController@add');
 	Route::post('/inventory/vendor/save','Inventory\VendorController@save');
-	Route::get('/inventory/vendor/edit','Inventory\VendorController@edit');
+	Route::get('/inventory/vendor/edit/{id}','Inventory\VendorController@edit');
 	Route::post('/inventory/vendor/update','Inventory\VendorController@update');
-	Route::get('/inventory/vendor/delete','Inventory\VendorController@delete');
+	Route::get('/inventory/vendor/delete/{id}','Inventory\VendorController@delete');
 	Route::get('/inventory/vendor/vendorlistjson','Inventory\VendorController@vendorListJson');

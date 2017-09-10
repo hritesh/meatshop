@@ -129,10 +129,10 @@ class InventoryController extends SecurityController
 		}
 	}
 
-	public function editPurchase(){
-		$param = __decryptToken();
+	public function editPurchase($id){
+		
 		$purchase=new Purchase;
-		$purchase_data=$purchase->getPurchaseById($param->id);
+		$purchase_data=$purchase->getPurchaseById($id);
 		
 
 		$itemname=new ItemName;
@@ -148,10 +148,10 @@ class InventoryController extends SecurityController
 		exit;
 
 	}
-	public function deletePurchase(){
-		$param=__decryptToken();
+	public function deletePurchase($id){
+		
 			$purchase=new Purchase;
-		$status=$purchase->deletePurchaseById($param->id);
+		$status=$purchase->deletePurchaseById($id);
 		if($status){
 			echo $status;
 			exit;
@@ -272,10 +272,10 @@ class InventoryController extends SecurityController
 		}
 	}
 
-	public function editSales(){
+	public function editSales($id){
 		$param = __decryptToken();
 		$sales=new Sales;
-		$sales_data=$sales->getSalesById($param->id);
+		$sales_data=$sales->getSalesById($id);
 		
 		$class=new Classes;
 		$class_data=$class->getAllClass();
