@@ -134,8 +134,6 @@
               }
               $.post(url,data,function(result){
                   if(result=="1"){
-                    loadItemList();
-                
                     $('#category').val('');
                     $('#status').attr('checked',false);
                      $('#hdnActionType').val('add');

@@ -57,7 +57,7 @@ Route::get('/inventory/itemname/itemjsonlist','Inventory\ItemNameController@item
 	//itemgroup
 	Route::get('/inventory/itemgroup/_list','Inventory\ItemGroupController@_list');
 	Route::get('/inventory/itemgroup/add','Inventory\ItemGroupController@add');
-	Route::post('/inventory/itemgroup/save','Inventory\Inventory\ItemGroupController@save');
+	Route::post('/inventory/itemgroup/save','Inventory\ItemGroupController@save');
 	Route::get('/inventory/itemgroup/edit/{id}','Inventory\ItemGroupController@edit');
 	Route::post('/inventory/itemgroup/update','Inventory\ItemGroupController@update');
 	Route::get('/inventory/itemgroup/delete/{id}','Inventory\ItemGroupController@delete');

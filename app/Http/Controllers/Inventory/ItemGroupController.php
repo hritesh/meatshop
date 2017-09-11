@@ -96,10 +96,8 @@ class ItemGroupController extends Controller{
 		$itemgroup=new ItemGroup;
 		$status=$itemgroup->deleteItemGroupById($id);
 		if($status){
-			echo $status;
+			echo $status;exit;
 		}
-		
-		exit;
 	}
 }
 
