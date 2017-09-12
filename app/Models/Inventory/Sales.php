@@ -8,14 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Sales extends  Model{
 	protected $table='tbl_sales';
 
-	public function saveSales($school_id,$item_name_id,$quantity,$rate,$price,$sold_to,$status,$description,$vendor_id,$month){
+	public function saveSales($item_name_id,$quantity,$rate,$price,$sold_to,$status,$description,$vendor_id,$month){
 		$this->item_name_id=$item_name_id;
 		$this->quantity=$quantity;
 		$this->rate=$rate;
 		$this->price=$price;
 		$this->sold_to=$sold_to;
 		$this->status=$status;
-		$this->school_id=$school_id;
 		$this->description=$description;
 		$this->vendor_id=$vendor_id;
 		$this->month=$month;
