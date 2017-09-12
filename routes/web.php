@@ -22,8 +22,8 @@ Route::get('/inventory/itemname/itemjsonlist','Inventory\ItemNameController@item
 	Route::get('/inventory/purchase/add','Inventory\InventoryController@addPurchase');
 	Route::post('/inventory/purchase/save','Inventory\InventoryController@purchaseSave');
 	Route::get('/inventory/purchase/edit/{id}','Inventory\InventoryController@editPurchase');
-	Route::post('/inventory/purchase/update{id}','Inventory\InventoryController@purchaseUpdate');
-	Route::get('/inventory/purchase/delete{id}','Inventory\InventoryController@deletePurchase');
+	Route::post('/inventory/purchase/update','Inventory\InventoryController@purchaseUpdate');
+	Route::get('/inventory/purchase/delete/{id}','Inventory\InventoryController@deletePurchase');
 	Route::get('/inventory/purchase/purchaselistjson','Inventory\InventoryController@purchaseListJson');
 
 	//purchase return 

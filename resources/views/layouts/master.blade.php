@@ -319,7 +319,7 @@
                                     <a href="#">Purchase<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                            <a href="/inventory/purchase/_list">List</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
