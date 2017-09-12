@@ -106,7 +106,7 @@ class InventoryController extends Controller
 	}
 
 	public function purchaseUpdate(Request $request){
-		$param = __decryptToken();
+		
 		$this->validate($request,['item_name_id'=>'required','quantity'=>'required','rate'=>'required','price'=>'required','vendor_id'=>'required','description'=>'required','sell_price'=>'required']);
 		$purchase=new Purchase;
 		$id=$_POST['purchase_id'];
@@ -125,7 +125,7 @@ class InventoryController extends Controller
 	}
 
 	public function editPurchase(){
-		$param = __decryptToken();
+		
 		$purchase=new Purchase;
 		$purchase_data=$purchase->getPurchaseById($param->id);
 		
@@ -248,7 +248,7 @@ class InventoryController extends Controller
 	}
 
 	public function salesUpdate(Request $request){
-		$param = __decryptToken();
+		
 		$this->validate($request,['item_name_id'=>'required','quantity'=>'required','rate'=>'required','price'=>'required','sold_to'=>'required','description'=>'required']);
 		$sales=new Sales;
 		$id=$_POST['sales_id'];
@@ -268,7 +268,7 @@ class InventoryController extends Controller
 	}
 
 	public function editSales(){
-		$param = __decryptToken();
+		
 		$sales=new Sales;
 		$sales_data=$sales->getSalesById($param->id);
 		
