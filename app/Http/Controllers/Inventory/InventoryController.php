@@ -9,19 +9,15 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Session;
-use App\Users;
-use App\Students;
-use App\Assignment;
-use App\Purchase;
-use App\ItemName;
-use App\Vendor;
-use App\ItemGroup;
-use App\Sales;
-use App\Classes;
-use App\PurchaseReturn;
-use App\SalesReturn;
+use App\Models\Inventory\Purchase;
+use App\Models\Inventory\ItemName;
+use App\Models\Inventory\Vendor;
+use App\Models\Inventory\ItemGroup;
+use App\Models\Inventory\Sales;
+use App\Models\Inventory\PurchaseReturn;
+use App\Models\Inventory\SalesReturn;
 
-class InventoryController extends SecurityController
+class InventoryController extends Controller
 {
 	public function index(Request $request){
 		return view('inventory/index');
@@ -36,7 +32,7 @@ class InventoryController extends SecurityController
 						->get();
 		foreach ($purchase_data as $key => $value) {
 			$purchase_data[$key]->edit_url= 'inventory/purchase/edit'.$value->purchase_id;
-			$purchase_data[$key]->delete_url='inventory/purchase/delete',.$value->purchase_id;
+			$purchase_data[$key]->delete_url='inventory/purchase/delete'.$value->purchase_id;
 			$purchasedReturnedData = $purchaseReturnObject->getRecordsByPurchaseId($value->purchase_id);
 			if(count($purchasedReturnedData)>0){
 				$purchase_data[$key]->returned_quantity = $purchasedReturnedData->quantity_returned;
@@ -120,9 +116,8 @@ class InventoryController extends SecurityController
 		else{
 			$status=0;
 		}
-		=;
 
-		$stat=$purchase->updatePurchase($id,,$request->item_name_id,$request->quantity,$request->rate,$request->price,$request->vendor_id,$status,$request->description,$request->sell_price);
+		$stat=$purchase->updatePurchase($id,$request->item_name_id,$request->quantity,$request->rate,$request->price,$request->vendor_id,$status,$request->description,$request->sell_price);
 		if($stat){
 			echo $stat;
 			exit;
@@ -243,9 +238,9 @@ class InventoryController extends SecurityController
 		else{
 			$status=0;
 		}
-		=;
+		
 
-		$stat=$sales->saveSales(,$request->item_name_id,$request->quantity,$request->rate,$request->price,$request->sold_to,$status,$request->description,$request->vendor_id,$request->month);
+		$stat=$sales->saveSales($request->item_name_id,$request->quantity,$request->rate,$request->price,$request->sold_to,$status,$request->description,$request->vendor_id,$request->month);
 		if($stat){
 			echo $stat;
 			exit;
@@ -263,9 +258,9 @@ class InventoryController extends SecurityController
 		else{
 			$status=0;
 		}
-		=;
+		
 
-		$stat=$sales->updateSales($id,,$request->item_name_id,$request->quantity,$request->rate,$request->price,$request->sold_to,$status,$request->description,$request->vendor_id);
+		$stat=$sales->updateSales($id,$request->item_name_id,$request->quantity,$request->rate,$request->price,$request->sold_to,$status,$request->description,$request->vendor_id);
 		if($stat){
 			echo $stat;
 			exit;
@@ -366,7 +361,7 @@ public function purchaseReturnSave(){
 					);
 
 			$purchase=new PurchaseReturn;
-			$data = $purchase->getPurchaseRecords(,$key,$_POST['item_name_id'],$value['0'],$value['2'],$value['4'],$_POST['month']);
+			$data = $purchase->getPurchaseRecords($key,$_POST['item_name_id'],$value['0'],$value['2'],$value['4'],$_POST['month']);
 			if(count($data)>0){
 				$purchase->updateRecords($array);
 			}else{
