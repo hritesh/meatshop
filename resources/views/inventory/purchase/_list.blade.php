@@ -168,9 +168,9 @@
               }
               url = "";
               if(actionType=="add"){
-                  url = "<?php echo __setLink('inventory/purchase/save');?>";
+                  url = "<?php echo 'inventory/purchase/save';?>";
               }else{
-                  url = "<?php echo __setLink('inventory/purchase/update');?>";
+                  url = "<?php echo 'inventory/purchase/update';?>";
               }
                if ($('#status').is(":checked"))
              {
@@ -233,7 +233,7 @@
 
      function loadPurchaseList(){
    
-      $.get('<?php echo __setLink('inventory/purchase/purchaselistjson');?>',function(result){
+      $.get('<?php echo 'inventory/purchase/purchaselistjson';?>',function(result){
        
           html = '';
       APP.showLoading();
@@ -331,9 +331,9 @@
                   
                   <td>
                     <div class="pull-left all-icons">
-                      <a onclick="editPurchase('<?php echo __setLink('/inventory/purchase/edit',array('id'=>$purchase->purchase_id)); ?>');" title="edit">
+                      <a onclick="editPurchase('<?php echo '/inventory/purchase/edit/'.$purchase->purchase_id; ?>');" title="edit">
                         <i class="icon-pencil"></i></a>
-                        <a type="select"   onclick="deletePurchase('<?php echo __setLink('inventory/purchase/delete',array('id'=>$purchase->purchase_id));?>');"  title="delete">
+                        <a type="select"   onclick="deletePurchase('<?php echo 'inventory/purchase/delete/'.$purchase->purchase_id;?>');"  title="delete">
                             <i class="icon-trash"></i>
                           </a>
                     </div>
@@ -360,7 +360,7 @@
         <h4 class="modal-title">Add Item</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="<?php echo __setLink('inventory/itemname/save',array('return_status'=>1)); ?>">
+        <form method="post" action="<?php echo 'inventory/itemname/save/'.'return_status'=>1; ?>">
           {{ csrf_field() }}
 
               <div class="span12">
@@ -404,7 +404,7 @@
         <h4 class="modal-title">Filter Body</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="<?php echo __setLink('inventory/vendor/save',array('return_status'=>1)); ?>">
+        <form method="post" action="<?php echo 'inventory/vendor/save/'.'return_status'=>1; ?>">
           {{ csrf_field() }}
 
              <div class="span12">

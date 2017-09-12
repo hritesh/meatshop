@@ -301,7 +301,7 @@
                                     <a href="#">Vendor<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                            <a href="/inventory/vendor/_list">List</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->

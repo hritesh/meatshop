@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Inventory;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Session;
-use App\Users;
-use App\ItemGroup;
-use App\Vendor;
+use App\Models\Inventory\ItemGroup;
+use App\Models\Inventory\Vendor;
 
-class VendorController extends SecurityController{
+class VendorController extends Controller{
 	public function _list(){
 		$vendor=new Vendor;
 		$vendor_data=$vendor->getAllVendor(getSchoolId());

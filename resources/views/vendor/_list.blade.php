@@ -98,9 +98,9 @@
               }
               url = "";
               if(actionType=="add"){
-                  url = "<?php echo __setLink('inventory/vendor/save');?>";
+                  url = "<?php echo 'inventory/vendor/save';?>";
               }else{
-                  url = "<?php echo __setLink('inventory/vendor/update');?>";
+                  url = "<?php echo 'inventory/vendor/update';?>";
               }
             
               data = {
@@ -150,7 +150,7 @@
 
      function loadVendorList(){
    
-      $.get('<?php echo __setLink('inventory/vendor/vendorlistjson');?>',function(result){
+      $.get('<?php echo 'inventory/vendor/vendorlistjson';?>',function(result){
        
           html = '';
       APP.showLoading();
@@ -234,8 +234,8 @@
                   
                   <td class="all-icons">
                 
-                        <a onclick="editVendor('<?php echo __setLink('/inventory/vendor/edit',array('id'=>$vendor->vendor_id))?>');"><i class="icon-pencil"></i></a> 
-                    <a type="select"   onclick="deleteVendor('<?php echo __setLink('inventory/vendor/delete',array('id'=>$vendor->vendor_id));?>');"  title="delete">
+                        <a onclick="editVendor('<?php echo '/inventory/vendor/edit/'.$vendor->vendor_id?>');"><i class="icon-pencil"></i></a> 
+                    <a type="select"   onclick="deleteVendor('<?php echo 'inventory/vendor/delete/'.$vendor->vendor_id;?>');"  title="delete">
                             <i class="icon-trash"></i>
                           </a>
                   </td>
