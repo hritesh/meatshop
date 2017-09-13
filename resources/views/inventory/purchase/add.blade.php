@@ -4,7 +4,7 @@
     <div class="span12 offset3">
       <div class="widget-box">
         <div class="widget-title widget-form-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-          <h5>Add Inventory Item Purchased</h5>
+      
           
         </div>
         <div class="widget-content">
