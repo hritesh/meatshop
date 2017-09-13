@@ -22,8 +22,8 @@ class VendorController extends Controller{
 		$vendor_data=$vendor->getAllVendor();
 			foreach ($vendor_data as $key => $value) {
 			
-			$vendor_data[$key]->edit_url = 'inventory/vendor/edit/'.$value->vendor_id;
-			$vendor_data[$key]->delete_url ='inventory/vendor/delete/'.$value->vendor_id; 
+			$vendor_data[$key]->edit_url = '/inventory/vendor/edit/'.$value->vendor_id;
+			$vendor_data[$key]->delete_url ='/inventory/vendor/delete/'.$value->vendor_id; 
 		} 
 		 header("Content-type:application/json");
 		echo json_encode($vendor_data);

@@ -241,8 +241,8 @@
         
           html+='<td class="all-icons">';
           html+='<div class="four-icons" style="padding-left:50px;">';
-          html+='<a onclick="editVendor(&apos;'+c.edit_url+'&apos;);" title="edit"><i class="icon-pencil"></i></a>';
-          html+='<a onclick="deleteVendor(&apos;'+c.delete_url+'&apos;);" type="select"><i class="icon-trash"></i></a>';
+          html+='<a onclick="editVendor(&apos;'+c.edit_url+'&apos;);" title="edit">Edit</a>';
+          html+='<a onclick="deleteVendor(&apos;'+c.delete_url+'&apos;);" type="select">Delete</a>';
           html+='</div>';
                      
           html+='</td>';  

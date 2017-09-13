@@ -27,7 +27,7 @@ class Vendor extends Model{
 		return $this->all();
 	}
 	public function updateVendor($id,$name,$address,$email,$contact,$phone,$p_name){
-		return $this->where('vendor_id',$id)->update(['item_group_id'=>$item_group_id,'name'=>$name,'address'=>$address,'email'=>$email,'contact'=>$contact,'phone'=>$phone,'p_name'=>$p_name]);
+		return $this->where('vendor_id',$id)->update(['name'=>$name,'address'=>$address,'email'=>$email,'contact'=>$contact,'phone'=>$phone,'p_name'=>$p_name]);
 	}
 	public function deleteVendorById($id){
 		return $this->where('vendor_id',$id)->delete();
