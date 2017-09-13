@@ -110,8 +110,9 @@
                                                    
                                   
                                   <td class="all-icons">
-                                      <a onclick="editvendor('<?php echo '/inventory/vendor/edit/'.$vendor->vendor_id?>');">Edit</a>
-                                    <a type="select"   onclick="deletevendor('<?php echo '/inventory/vendor/delete/'.$vendor->vendor_id?>');"  title="delete">
+                                      
+                                      <a onclick="editVendor('<?php echo '/inventory/vendor/edit/'.$vendor->vendor_id?>');">Edit</a>
+                                    <a type="select"   onclick="deleteVendor('<?php echo '/inventory/vendor/delete/'.$vendor->vendor_id?>');"  title="delete">
                                             Delete
                                           </a>
                                    </td> 
@@ -176,7 +177,6 @@
                    contact : $('#contact').val(),
                     p_name : $('#p_name').val(),
                      phone : $('#phone').val(),
-               prompt( $vendor_id);exit;
             
               }
               $.post(url,data,function(result){
@@ -259,7 +259,5 @@
    
 
 @endSection
-@include('includes.footer-scripts')  
-  </body>
- </html>
+
  

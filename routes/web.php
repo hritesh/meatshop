@@ -67,7 +67,7 @@ Route::get('/inventory/itemname/itemjsonlist','Inventory\ItemNameController@item
 	Route::get('/inventory/vendor/_list','Inventory\VendorController@_list');
 	Route::get('/inventory/vendor/add','Inventory\VendorController@add');
 	Route::post('/inventory/vendor/save','Inventory\VendorController@save');
-	Route::get('/inventory/vendor/edit','Inventory\VendorController@edit');
+	Route::get('/inventory/vendor/edit/{id}','Inventory\VendorController@edit');
 	Route::post('/inventory/vendor/update','Inventory\VendorController@update');
 	Route::get('/inventory/vendor/delete','Inventory\VendorController@delete');
 	Route::get('/inventory/vendor/vendorlistjson','Inventory\VendorController@vendorListJson');

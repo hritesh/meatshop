@@ -65,8 +65,6 @@ class VendorController extends Controller{
 
 	public function update(Request $request){
 		$vendor=new Vendor;
-	
-		$param = __decryptToken();
 		$id=$_POST['vendor_id'];
 		$stat=$vendor->updateVendor($id,$request->name,$request->address,$request->email,$request->contact,$request->phone,$request->p_name);
 		if($stat){
