@@ -1,17 +1,13 @@
 @extends('layouts.master')
 @section('content')
-
-  <div class="row-fluid">
-    <div class="span12">
-      <div class="widget-box">
-           <?php if(Session::has('nonempty')){ ?>
-            <div class="alert alert-danger"><?php echo Session::get('nonempty'); ?> </div>
-    <?php     } ?>
-          <div class="widget-title widget-form-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>Vendor List</h5>
-          
-          </div>
-          <div class="widget-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Vendor</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
             <form id="frmAjaxSender">
         
             <div class="span12">
@@ -38,11 +34,9 @@
               </div>
 
               
-              </div>
 
-              
 
-             <div class="span12">
+           
 
                 <div class="span4">
                 <label class="span4">Contact Name </label>
@@ -65,15 +59,86 @@
                 </div>
               </div>
 
-            </div>
-          
-              
-              <div class="span12" style="margin-bottom: 10px;">
-            <input type="hidden" id="hdnActionType" value="add">
-            <button class="btn btn-success" type="button" onclick="saveVendor($('#hdnActionType').val())"><i class="icon-save" style="padding-right: 5px;"></i>Save</button>
-            </div>
             
-         </form>
+          
+                      <div class="span3">
+                        <input type="hidden" id="hdnActionType" value="add">
+                        <button class="btn btn-success" type="button" onclick="saveVendor($('#hdnActionType').val())" style="margin: 0px !important;">Save</button>
+                        </div>
+                        </div>
+
+                     </form>        
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+             <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="tblVendorList" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>SN</th>
+                                            <th>Company Name</th>
+                                            <th>Company Address</th>
+                                            <th>Email</th>
+                                              <th>Contact No</th>
+                                                <th>Contact Person Name</th>
+                                                  <th>Phone No</th>
+                                                    <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         <?php $i=1; foreach($vendor_data as $vendor){ ?>
+
+                                <tr <?php if($i%2==0){ ?> class="gradeA odd" <?php }else{ ?> class="gradeA even" <?php } ?>>
+                                  <td class="  sorting_1"><?php echo $i ?></td>
+                              
+                                   <td class=" ">{{$vendor->name}} </td>
+                                    <!--<td class=" ">{{$vendor->item_group_id}} </td>-->
+                                    <td>{{$vendor->address}}</td>
+                                    <td>{{$vendor->email}}</td>
+                                    <td>{{$vendor->contact}}</td>
+                                    <td>{{$vendor->p_name}}</td>
+                                    <td>{{$vendor->phone}}</td>
+                                                   
+                                  
+                                  <td class="all-icons">
+                                      <a onclick="editvendor('<?php echo '/inventory/vendor/edit/'.$vendor->vendor_id?>');">Edit</a>
+                                    <a type="select"   onclick="deletevendor('<?php echo '/inventory/vendor/delete/'.$vendor->vendor_id?>');"  title="delete">
+                                            Delete
+                                          </a>
+                                   </td> 
+                  
+                </tr>
+               
+           <?php $i++;} ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <script type="text/javascript">
+        $(document).ready(function(){
+            $('#tblVendorList').DataTable({
+                responsive: true
+            });
+        });
+            
+</script>
+
  <script>
             function editVendor(url){
                 $.get(url,function(result){
@@ -98,9 +163,9 @@
               }
               url = "";
               if(actionType=="add"){
-                  url = "<?php echo 'inventory/vendor/save';?>";
+                  url = "<?php echo '/inventory/vendor/save';?>";
               }else{
-                  url = "<?php echo 'inventory/vendor/update';?>";
+                  url = "<?php echo '/inventory/vendor/update';?>";
               }
             
               data = {
@@ -111,7 +176,7 @@
                    contact : $('#contact').val(),
                     p_name : $('#p_name').val(),
                      phone : $('#phone').val(),
-               
+               prompt( $vendor_id);exit;
             
               }
               $.post(url,data,function(result){
@@ -150,7 +215,7 @@
 
      function loadVendorList(){
    
-      $.get('<?php echo 'inventory/vendor/vendorlistjson';?>',function(result){
+      $.get('<?php echo '/inventory/vendor/vendorlistjson';?>',function(result){
        
           html = '';
       APP.showLoading();
@@ -159,7 +224,7 @@
 
                APP.hideLoading();
                bootbox.alert("No Data");
-               $('#tblDivisionList').html('<tr style="margin-top:100px;"><td style="text-align:center;">0 Record Found.</td></tr>');
+               $('#tblVendorList').html('<tr style="margin-top:100px;"><td style="text-align:center;">0 Record Found.</td></tr>');
                 return false;
        }  
         $.each(result,function(i,c){
@@ -190,67 +255,11 @@
    }
           </script>
 
-
-            <div id="tblVendorList" class="dataTables_wrapper" role="grid">
-            <table class="table table-bordered data-table dataTable" id="DataTables_Table_0">
-              <thead>
-                <tr role="row">
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 25px;"><div class="DataTables_sort_wrapper">S.N.<span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span></div></th>
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 329px;"><div class="DataTables_sort_wrapper">
-                Company Name
-                <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-               
-                
-
-                 <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Company Address <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-                     <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Email <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-                         <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Contact no <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-                         <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Contact Person Name <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-                         <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 90px;"><div class="DataTables_sort_wrapper">Phone No.<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-                         
-
-
-                <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Action<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-                </tr>
-              </thead>
-              
-            <tbody role="alert" aria-live="polite" aria-relevant="all">
-            <?php $i=1; foreach($vendor_data as $vendor){ ?>
-
-            	<tr <?php if($i%2==0){ ?> class="gradeA odd" <?php }else{ ?> class="gradeA even" <?php } ?>>
-                  <td class="  sorting_1"><?php echo $i ?></td>
-                  <td class=" ">{{$vendor->name}} </td>
-                  <!--<td class=" ">{{$vendor->item_group_id}} </td>-->
-                  <td>{{$vendor->address}}</td>
-                  <td>{{$vendor->email}}</td>
-                  <td>{{$vendor->contact}}</td>
-                  <td>{{$vendor->p_name}}</td>
-                  <td>{{$vendor->phone}}</td>
-                 
-                  
-                  <td class="all-icons">
-                
-                        <a onclick="editVendor('<?php echo '/inventory/vendor/edit/'.$vendor->vendor_id?>');"><i class="icon-pencil"></i></a> 
-                    <a type="select"   onclick="deleteVendor('<?php echo 'inventory/vendor/delete/'.$vendor->vendor_id;?>');"  title="delete">
-                            <i class="icon-trash"></i>
-                          </a>
-                  </td>
-                    
-                  
-                </tr>
-              
-           <?php $i++;} ?>
-             </tbody>
-            </table>
-       
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
+  
+   
 
 @endSection
+@include('includes.footer-scripts')  
+  </body>
+ </html>
+ 

@@ -14,16 +14,16 @@ use App\Models\Inventory\Vendor;
 class VendorController extends Controller{
 	public function _list(){
 		$vendor=new Vendor;
-		$vendor_data=$vendor->getAllVendor(getSchoolId());
+		$vendor_data=$vendor->getAllVendor();
 		return view('vendor/_list',['vendor_data'=>$vendor_data]);
 	}
 	public function vendorListJson(){
 		$vendor=new Vendor;
-		$vendor_data=$vendor->getAllVendor(getSchoolId());
+		$vendor_data=$vendor->getAllVendor();
 			foreach ($vendor_data as $key => $value) {
 			
-			$vendor_data[$key]->edit_url = __setLink('inventory/vendor/edit',array('id'=>$value->vendor_id));
-			$vendor_data[$key]->delete_url =__setLink('inventory/vendor/delete',array('id'=>$value->vendor_id)); 
+			$vendor_data[$key]->edit_url = 'inventory/vendor/edit/'.$value->vendor_id;
+			$vendor_data[$key]->delete_url ='inventory/vendor/delete/'.$value->vendor_id; 
 		} 
 		 header("Content-type:application/json");
 		echo json_encode($vendor_data);
@@ -32,18 +32,18 @@ class VendorController extends Controller{
 
 	public function add(){
 		$itemgroup=new ItemGroup;
-		$itemgroup_data=$itemgroup->getAllItemGroup(getSchoolId());
+		$itemgroup_data=$itemgroup->getAllItemGroup();
 
 		return view('vendor/add',['itemgroup_data'=>$itemgroup_data]);
 	}
 	public function save(Request $request){
-		$param=__decryptToken();
+		
 		$vendor=new Vendor;
-		$school_id=getSchoolId();
-		$stat=$vendor->saveVendor($request->item_group_id,$request->name,$school_id,$request->address,$request->email,$request->contact,$request->phone,$request->p_name);
+		
+		$stat=$vendor->saveVendor($request->name,$request->address,$request->email,$request->contact,$request->phone,$request->p_name);
 		if($stat){
 			if(isset($param->return_status)){
-				return redirect(__setLink('inventory/purchase/add'));
+				return redirect('inventory/purchase/add');
 			}else{
 			echo $stat;
 			exit;
@@ -51,12 +51,12 @@ class VendorController extends Controller{
 	}
 	}
 
-	public function edit(){
+	public function edit($id){
 		$vendor=new Vendor;
-		$param = __decryptToken();
-		$vendor_data=$vendor->getVendorById($param->id);
+
+		$vendor_data=$vendor->getVendorById($id);
 		$itemgroup=new ItemGroup;
-		$itemgroup_data=$itemgroup->getAllItemGroup(getSchoolId());
+		$itemgroup_data=$itemgroup->getAllItemGroup();
 		$vendor_data=$vendor_data->toArray();
 		 header("Content-type:application/json");
 		echo json_encode($vendor_data);
@@ -65,20 +65,20 @@ class VendorController extends Controller{
 
 	public function update(Request $request){
 		$vendor=new Vendor;
-		$school_id=getSchoolId();
+	
 		$param = __decryptToken();
 		$id=$_POST['vendor_id'];
-		$stat=$vendor->updateVendor($id,$request->item_group_id,$request->name,$school_id,$request->address,$request->email,$request->contact,$request->phone,$request->p_name);
+		$stat=$vendor->updateVendor($id,$request->name,$request->address,$request->email,$request->contact,$request->phone,$request->p_name);
 		if($stat){
 			echo $stat;
 			exit;
 		}
 	}
 
-	public function delete(){
-		$param=__decryptToken();
+	public function delete($id){
+		
 		$vendor=new Vendor;
-		$status=$vendor->deleteVendorById($param->id);
+		$status=$vendor->deleteVendorById($id);
 		if($status){
 			echo $status;
 			exit;
