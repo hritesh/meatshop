@@ -168,9 +168,9 @@
               }
               url = "";
               if(actionType=="add"){
-                  url = "<?php echo 'inventory/purchase/save';?>";
+                  url = "<?php echo '/inventory/purchase/save';?>";
               }else{
-                  url = "<?php echo 'inventory/purchase/update';?>";
+                  url = "<?php echo '/inventory/purchase/update';?>";
               }
                if ($('#status').is(":checked"))
              {
@@ -360,7 +360,8 @@
         <h4 class="modal-title">Add Item</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="<?php echo 'inventory/itemname/save/'.'return_status'=>1; ?>">
+        <?php $status = 1;?>
+        <form method="post" action="<?php echo 'inventory/itemname/save/'.$status; ?>">
           {{ csrf_field() }}
 
               <div class="span12">
@@ -404,7 +405,8 @@
         <h4 class="modal-title">Filter Body</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="<?php echo 'inventory/vendor/save/'.'return_status'=>1; ?>">
+
+        <form method="post" action="<?php echo 'inventory/vendor/save/'.$status; ?>">
           {{ csrf_field() }}
 
              <div class="span12">
@@ -493,7 +495,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   /*  $('#selCategory').on("change",function(){
         categoryid = $('#selCategory').val();
-        $.get('/inventory/itemname/'+categoryid+'?token='+'<?php echo getToken(); ?>', function (res) {
+        $.get('/inventory/itemname/'+categoryid+'?to function (res) {
            // $('#s1').select2({data:res,text:res.text,id:res.id});
             //json = eval(res);
             if(res){

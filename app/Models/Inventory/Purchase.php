@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Purchase extends  Model{
 	protected $table='tbl_purchase';
 
-	public function savePurchase($school_id,$item_name_id,$quantity,$rate,$price,$vendor_id,$status,$description,$sell_price,$month){
+	public function savePurchase($item_name_id,$quantity,$rate,$price,$vendor_id,$status,$description,$sell_price,$month){
 		$this->item_name_id=$item_name_id;
 		$this->quantity=$quantity;
 		$this->rate=$rate;
