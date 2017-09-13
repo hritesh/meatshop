@@ -259,7 +259,5 @@
    
 
 @endSection
-@include('includes.footer-scripts')  
-  </body>
- </html>
+
  

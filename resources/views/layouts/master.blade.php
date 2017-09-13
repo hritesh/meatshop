@@ -1,4 +1,5 @@
 @include('includes.head')
+
 <body>
 
     <div id="wrapper">
@@ -458,5 +459,8 @@
 
     </div>
     <!-- /#wrapper -->
-
+     <!-- jQuery -->
+   
+</body>
+</html>
 
