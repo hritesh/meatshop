@@ -16,7 +16,7 @@
     <script src="{{asset('template/vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('template/vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
      <script src="{{asset('template/vendor/bootbox/bootbox.min.js')}}"></script>
-     <script src="{{asset('template/js/app1.js')}}"></script>
+     <script src="{{asset('js/app1.js')}}"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="{{asset('template/dist/js/sb-admin-2.js')}}"></script>
