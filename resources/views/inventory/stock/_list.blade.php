@@ -16,7 +16,7 @@
           @endforeach
            
           
-         <form method="post" action="<?php echo __setLink('inventory/stock/get')?>">
+         <form method="post" action="<?php echo '/inventory/stock/get'?>">
             {{ csrf_field() }}
             <div class="span12">
               <div class="span3">

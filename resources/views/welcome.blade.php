@@ -3,7 +3,7 @@
 
     <div id="wrapper">
 
-        <!-- Navigation -------->
+        <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -276,26 +276,77 @@
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Inventory Manager<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                
+                                
                                 <li>
-                                    <a href="/inventory/itemgroup/_list">ItemGroup</a>
-                                </li>
-                                <li>
-                                    <a href="/inventory/itemname/_list">ItemName</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <a href="#">Item Group<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="/inventory/itemgroup/_list">List</a>
                                         </li>
+                                        
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Item Name<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="/inventory/itemname/_list">List</a>
                                         </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Vendor<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="/inventory/vendor/_list">List</a>
                                         </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Stock<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Third Level Item</a>
+                                            <a href="/inventory/stock/_list">List</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Purchase<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/purchase/_list">List</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Purchase Return<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/purchase/return">List</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Sales<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/sales/_list">List</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Sales Return<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="/inventory/sales/return">List</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -407,7 +458,6 @@
 
     </div>
     <!-- /#wrapper -->
+</body>
+</html>
 
-@include('includes.footer-scripts')  
- </body>
- </html>

@@ -35,8 +35,8 @@ class InventoryController extends Controller
 			$purchase_data[$key]->delete_url='/inventory/purchase/delete/'.$value->purchase_id;
 			$purchasedReturnedData = $purchaseReturnObject->getRecordsByPurchaseId($value->purchase_id);
 			if(count($purchasedReturnedData)>0){
-				$purchase_data[$key]->returned_quantity = $purchasedReturnedData->quantity_returned;
-				$purchase_data[$key]->returned_price = $purchasedReturnedData->total_price;
+				$purchase_data[$key]->returned_quantity = isset($purchasedReturnedData->quantity_returned)?$purchasedReturnedData->quantity_returned:0;
+				$purchase_data[$key]->returned_price = isset($purchasedReturnedData->total_price)?$purchasedReturnedData->total_price:0;
 			}else{
 				$purchase_data[$key]->returned_quantity = 0;
 				$purchase_data[$key]->returned_price = 0;

@@ -78,3 +78,7 @@ Route::get('/inventory/itemname/itemjsonlist','Inventory\ItemNameController@item
 	Route::post('/inventory/vendor/update','Inventory\VendorController@update');
 	Route::get('/inventory/vendor/delete/{id}','Inventory\VendorController@delete');
 	Route::get('/inventory/vendor/vendorlistjson','Inventory\VendorController@vendorListJson');
+
+	//stock
+	Route::get('/inventory/stock/_list','Inventory\InventoryController@stockIndex');
+	Route::post('/inventory/stock/get','Inventory\InventoryController@stockList');

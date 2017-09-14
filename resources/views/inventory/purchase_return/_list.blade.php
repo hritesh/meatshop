@@ -89,7 +89,7 @@
           month : $('#ddlMonth').val(),
         purchaseArray:purchase_array
       }
-      $.post('/inventory/purchase/return/save?token=<?php echo getToken();?>',data,function(result){
+      $.post('/inventory/purchase/return/save',data,function(result){
         APP.hideLoading();
           bootbox.alert('Successfully Saved.');
       });
@@ -103,13 +103,13 @@
     month = $('#ddlMonth').val();
     
       
-    $.get("/inventory/purchase/return/_list/"+item_name_id+"/"+month+"?token=<?php echo getToken();?>",function(result){
+    $.get("/inventory/purchase/return/_list/"+item_name_id+"/"+month,function(result){
         html = "";
 
         data = $.parseJSON(result);
         if(data.purchase.length==0){
           APP.hideLoading();
-          bootbox.alert('Period Setting not found!');
+          bootbox.alert('No Records Found!');
           $('#tblStudentFeeList').html('<tr><td style="text-align:center;">0 Record Found.</td></tr>');
           return false;
         }
