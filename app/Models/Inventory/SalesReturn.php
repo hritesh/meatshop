@@ -16,9 +16,8 @@ class SalesReturn extends  Model{
 		$this->returned_price=$array['returned_price'];
 		$this->returned_by=$array['returned_by'];
 		$this->returned_quantity = $array['returned_quantity'];
-		$this->school_id=$array['school_id'];
 		$this->description=$array['narration'];
-		$this->school_id= $array['school_id'];
+
 		$this->vendor_id=$array['vendor_id'];
 		$this->month = $array['month'];
 		return $this->save();

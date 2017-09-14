@@ -15,22 +15,22 @@ class Purchase extends  Model{
 		$this->price=$price;
 		$this->vendor_id=$vendor_id;
 		$this->status=$status;
-		$this->school_id=$school_id;
+		
 		$this->sell_price=$sell_price;
 		$this->description=$description;
 		$this->month=$month;
 		return $this->save();
 	}
 
-	public function getAllPurchase($school_id){
-		return $this->where('school_id',$school_id)->get();
+	public function getAllPurchase(){
+		return $this->all();
 	}
 
 	public function getPurchaseById($id){
 		return $this->where('purchase_id',$id)->get();
 	}
-	public function updatePurchase($id,$school_id,$item_name_id,$quantity,$rate,$price,$vendor_id,$status,$description,$sell_price){
-		return $this->where('purchase_id',$id)->update(['school_id'=>$school_id,'item_name_id'=>$item_name_id,'quantity'=>$quantity,'rate'=>$rate,'price'=>$price,'vendor_id'=>$vendor_id,'status'=>$status,'description'=>$description,'sell_price'=>$sell_price]);
+	public function updatePurchase($id,$item_name_id,$quantity,$rate,$price,$vendor_id,$status,$description,$sell_price){
+		return $this->where('purchase_id',$id)->update(['item_name_id'=>$item_name_id,'quantity'=>$quantity,'rate'=>$rate,'price'=>$price,'vendor_id'=>$vendor_id,'status'=>$status,'description'=>$description,'sell_price'=>$sell_price]);
 	}
 	public function deletePurchaseById($id){
 		return $this->where('purchase_id',$id)->delete();

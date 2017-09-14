@@ -1,26 +1,14 @@
 @extends('layouts.master')
+
 @section('content')
-
-  <div class="row-fluid">
-    <div class="span12">
-      
-      <div class="widget-box">
-       <?php if(Session::has('nonempty')){ ?>
-            <div class="alert alert-danger"><?php echo Session::get('nonempty'); ?> </div>
-    <?php     } ?>
-          <div class="widget-title widget-form-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>Inventory Purchase List</h5>
-            <div class="pull-right">
-            <a id="filter" class="btn btn-primary form-btn"> Add Item
-                      </a>
-            <a id="filterVendor" class="btn btn-primary form-btn"> Add vendor
-                              </a>
-
-             <!-- <input type="hidden" id="hdnActionType" value="add">
-            <button class="btn btn-primary form-btn" type="button" onclick="savePurchase($('#hdnActionType').val())">Save</button> -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Purchase</h1>
+                </div>
+                <!-- /.col-lg-12 -->
             </div>
-          </div>
-          <div class="widget-content">
+            <div class="row">
+                <div class="col-lg-12">
 
               <form id="frmAjaxSender">
   
@@ -58,12 +46,11 @@
                 </div>
               </div>
 
-              </div>
+              
 
             
               
 
-                <div class="span12">
                     <div class="span4">
                         <label class="span3">Price </label>
                           <div class="span7">
@@ -98,9 +85,8 @@
                           </div> -->
                     </div>
                           
-                  </div>
+                  
 
-              <div class="span12">
               <div class="span6">
                 <label class="span2">Narration </label>
                 <div class="span10">
@@ -120,22 +106,94 @@
                 </div>
               </div>
 
-              </div>
+              
 
-              <div class="span12">
+           
                 <div class="span6">
                 <label class="span2">Purchase Returned ?</label>
                 <div class="span2">
                   <input type="checkbox" name="status" id="status"  class="span4 m-wrap"  >
                 </div>
               </div>
-               <div class="span12">
-            <input type="hidden" id="hdnActionType" value="add">
-            <button class="btn btn-success" type="button" onclick="savePurchase($('#hdnActionType').val())" style="margin: 10px;">Save</button>
+
+              <div class="span3">
+                        <input type="hidden" id="hdnActionType" value="add">
+                        <button class="btn btn-success" type="button" onclick="savePurchase($('#hdnActionType').val())" style="margin: 0px !important;">Save</button>
+                        </div>
+                        </div>
+                    </form>
+                      </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="tblPurchaseList" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>SN</th>
+                                            <th>Item Name</th>                                    
+                                            <th>Quantity</th>
+                                              <th>Rate </th>
+                                                <th>Total Price</th>
+                                                  <th>Selling Price</th>
+                                                  <th>Vendor </th>
+                                                  <th>Purchased Return Quantity</th>
+                                                    <th>Purchase Return Price</th>
+                                                  <th>Narration</th>
+                                                    <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         <?php $i=1; foreach($purchase_data as $purchase){ ?>
+
+                                <tr <?php if($i%2==0){ ?> class="gradeA odd" <?php }else{ ?> class="gradeA even" <?php } ?>>
+                                  <td class="  sorting_1"><?php echo $i ?></td>
+                               <td class=" ">{{$purchase->item_name}} </td>
+                 
+                                  <td>{{$purchase->quantity}}</td>
+                                  <td>{{$purchase->rate}}</td>
+                                  <td>{{$purchase->price}}</td>
+                                  <td class=" ">{{$purchase->sell_price}} </td>
+                                  <td>{{$purchase->name}}</td>
+                                  <td>{{$purchase->returned_quantity}}</td>
+                                  <td>{{$purchase->returned_price}}</td>
+                                    <td>{{$purchase->description}}</td>
+                                  
+                                  <td class="all-icons">
+                                      
+                                      <a onclick="editPurchase('<?php echo '/inventory/purchase/edit/'.$purchase->purchase_id?>');">Edit</a>
+                                    <a type="select"   onclick="deletePurchase('<?php echo '/inventory/purchase/delete/'.$purchase->purchase_id?>');"  title="delete">
+                                            Delete
+                                          </a>
+                                   </td> 
+                  
+                </tr>
+               
+           <?php $i++;} ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
             </div>
-              </div>
-            
-         </form>
+
+
+
+
  <script>
             function editPurchase(url){
                 $.get(url,function(result){
@@ -233,7 +291,7 @@
 
      function loadPurchaseList(){
    
-      $.get('<?php echo 'inventory/purchase/purchaselistjson';?>',function(result){
+      $.get('<?php echo '/inventory/purchase/purchaselistjson';?>',function(result){
        
           html = '';
       APP.showLoading();
@@ -261,8 +319,8 @@
         html+='<td class=" ">'+c.description+'</td>';
           html+='<td class="all-icons">';
           html+='<div class="four-icons" style="padding-left:50px;">';
-          html+='<a onclick="editPurchase(&apos;'+c.edit_url+'&apos;);" title="edit"><i class="icon-pencil"></i></a>';
-          html+='<a onclick="deletePurchase(&apos;'+c.delete_url+'&apos;);" type="select"><i class="icon-trash"></i></a>';
+          html+='<a onclick="editPurchase(&apos;'+c.edit_url+'&apos;);" title="edit">Edit</a>';
+          html+='<a onclick="deletePurchase(&apos;'+c.delete_url+'&apos;);" type="select">Delete</a>';
           html+='</div>';
                      
           html+='</td>';  
@@ -275,81 +333,7 @@
    }
           </script>
 
-            <div id="tblPurchaseList" class="dataTables_wrapper" role="grid">
-            <table class="table table-bordered data-table dataTable" id="DataTables_Table_0">
-              <thead>
-                <tr role="row">
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 25px;"><div class="DataTables_sort_wrapper">S.N.<span class="DataTables_sort_icon css_right ui-icon ui-icon-triangle-1-n"></span></div></th>
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 329px;"><div class="DataTables_sort_wrapper">
-                Item Name
-                <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-                
-               
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 50px;"><div class="DataTables_sort_wrapper">Quantity <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 70px;"><div class="DataTables_sort_wrapper">Rate <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 130px;"><div class="DataTables_sort_wrapper">Total Price <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-                   <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 329px;"><div class="DataTables_sort_wrapper">
-                Selling Price
-                <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 230px;"><div class="DataTables_sort_wrapper">Vendor <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Purchase Return Quantity <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Purchase Return Price <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-
-                    <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Narration <span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-              
-
-                <th class="ui-state-default" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine : activate to sort column ascending" style="width: 173px;"><div class="DataTables_sort_wrapper">Action<span class="DataTables_sort_icon css_right ui-icon ui-icon-carat-2-n-s"></span></div></th>
-                </tr>
-              </thead>
-              
-            <tbody role="alert" aria-live="polite" aria-relevant="all">
-            <?php $i=1; foreach($purchase_data as $purchase){ ?>
-
-            	<tr <?php if($i%2==0){ ?> class="gradeA odd" <?php }else{ ?> class="gradeA even" <?php } ?>>
-                  <td class="  sorting_1"><?php echo $i ?></td>
-                  <td class=" ">{{$purchase->item_name}} </td>
-                 
-                  <td>{{$purchase->quantity}}</td>
-                  <td>{{$purchase->rate}}</td>
-                  <td>{{$purchase->price}}</td>
-                  <td class=" ">{{$purchase->sell_price}} </td>
-                  <td>{{$purchase->name}}</td>
-                  <td>{{$purchase->returned_quantity}}</td>
-                  <td>{{$purchase->returned_price}}</td>
-                    <td>{{$purchase->description}}</td>
-                 
-                  
-                  <td>
-                    <div class="pull-left all-icons">
-                      <a onclick="editPurchase('<?php echo '/inventory/purchase/edit/'.$purchase->purchase_id; ?>');" title="edit">
-                        <i class="icon-pencil"></i></a>
-                        <a type="select"   onclick="deletePurchase('<?php echo 'inventory/purchase/delete/'.$purchase->purchase_id;?>');"  title="delete">
-                            <i class="icon-trash"></i>
-                          </a>
-                    </div>
-                    
-                  
-                </tr>
-               
-           <?php $i++;} ?>
-            </tbody>
-            </table>
          
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
 
 <div id="addItem" class="modal fade filter-modal" tabindex="-1" role="dialog" style="display: none;">
   <div class="modal-dialog" role="document">

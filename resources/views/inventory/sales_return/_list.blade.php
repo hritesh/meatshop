@@ -94,7 +94,7 @@
          month : $('#ddlMonth').val(),
         salesArray:salesArray
       }
-      $.post('/inventory/sales/return/save?token=<?php echo getToken();?>',data,function(result){
+      $.post('/inventory/sales/return/save ',data,function(result){
         APP.hideLoading();
           bootbox.alert('Successfully Saved.');
       });
@@ -108,7 +108,7 @@
     month = $('#ddlMonth').val();
     
       
-    $.get("/inventory/sales/return/filter/"+item_id+"/"+month+"?token=<?php echo getToken();?>",function(result){
+    $.get("/inventory/sales/return/filter/"+item_id+"/"+month,function(result){
         html = "";
 
         data = $.parseJSON(result);
@@ -132,7 +132,7 @@
         $.each(data.sales_data,function(i,c){
               html+='<tr>';
                 html+='<td style="text-align:center;">'+c.vendor_name+'</td>';
-              html+='<td style="text-align:center;">'+c.student_name+'</td>';
+              html+='<td style="text-align:center;">'+c.sold_to+'</td>';
               html+='<td style="text-align:center;">'+c.rate+'</td>';
               html+='<td style="text-align:center;">'+c.quantity+'</td>';
                  // remark = (c.diary_records[c.teacher_id])?c.diary_records[c.teacher_id][0]:'';

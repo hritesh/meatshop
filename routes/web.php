@@ -36,11 +36,18 @@ Route::get('/inventory/itemname/itemjsonlist','Inventory\ItemNameController@item
 	Route::get('/inventory/sales/_list','Inventory\InventoryController@salesList');
 	Route::get('/inventory/sales/add','Inventory\InventoryController@addSales');
 	Route::post('/inventory/sales/save','Inventory\InventoryController@salesSave');
-	Route::get('/inventory/sales/edit','Inventory\InventoryController@editSales');
+	Route::get('/inventory/sales/edit/{id}','Inventory\InventoryController@editSales');
 	Route::post('/inventory/sales/update','Inventory\InventoryController@salesUpdate');
-	Route::get('/inventory/sales/delete','Inventory\InventoryController@deleteSales');
+	Route::get('/inventory/sales/delete/{id}','Inventory\InventoryController@deleteSales');
 	Route::get('/inventory/price/{itemid}','Inventory\InventoryController@getItemById');
 	Route::get('/inventory/sales/saleslistjson','Inventory\InventoryController@salesListJson');
+
+
+	//sales return 
+	Route::get('/inventory/sales/return','Inventory\InventoryController@salesReturnIndex');
+	Route::get('/inventory/sales/return/filter/{item_name_id}/{month}','Inventory\InventoryController@salesReturnFilter');
+	Route::post('/inventory/sales/return/save','Inventory\InventoryController@saveSalesReturn');
+
 	//stock
 	Route::get('/inventory/stock/_list','Inventory\InventoryController@stockIndex');
 	Route::post('/inventory/stock/get','Inventory\InventoryController@stockList');

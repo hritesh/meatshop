@@ -31,8 +31,8 @@ class InventoryController extends Controller
 						->select('tbl_purchase.*','tbl_item_name.item_name','tbl_vendor.name')
 						->get();
 		foreach ($purchase_data as $key => $value) {
-			$purchase_data[$key]->edit_url= 'inventory/purchase/edit'.$value->purchase_id;
-			$purchase_data[$key]->delete_url='inventory/purchase/delete'.$value->purchase_id;
+			$purchase_data[$key]->edit_url= '/inventory/purchase/edit/'.$value->purchase_id;
+			$purchase_data[$key]->delete_url='/inventory/purchase/delete/'.$value->purchase_id;
 			$purchasedReturnedData = $purchaseReturnObject->getRecordsByPurchaseId($value->purchase_id);
 			if(count($purchasedReturnedData)>0){
 				$purchase_data[$key]->returned_quantity = $purchasedReturnedData->quantity_returned;
@@ -124,10 +124,10 @@ class InventoryController extends Controller
 		}
 	}
 
-	public function editPurchase(){
+	public function editPurchase($id){
 		
 		$purchase=new Purchase;
-		$purchase_data=$purchase->getPurchaseById($param->id);
+		$purchase_data=$purchase->getPurchaseById($id);
 		
 
 		$itemname=new ItemName;
@@ -143,10 +143,10 @@ class InventoryController extends Controller
 		exit;
 
 	}
-	public function deletePurchase(){
-		$param=__decryptToken();
+	public function deletePurchase($id){
+		
 			$purchase=new Purchase;
-		$status=$purchase->deletePurchaseById($param->id);
+		$status=$purchase->deletePurchaseById($id);
 		if($status){
 			echo $status;
 			exit;
@@ -160,12 +160,16 @@ class InventoryController extends Controller
 		$sales_data=DB::table('tbl_sales')
 						
 						->join('tbl_item_name','tbl_sales.item_name_id','=','tbl_item_name.item_name_id')
-						->join('tbl_student_details','tbl_sales.sold_to','=','tbl_student_details.student_id')
+						
 						->join('tbl_vendor','tbl_sales.vendor_id','=','tbl_vendor.vendor_id')
-						->select('tbl_sales.*','tbl_item_name.item_name','tbl_student_details.student_name','tbl_vendor.name as vendor_name')
+						->select('tbl_sales.*','tbl_item_name.item_name','tbl_vendor.name as vendor_name')
 						->get();
 		
 			foreach ($sales_data as $key => $value) {
+
+					$sales_data[$key]->edit_url = '/inventory/sales/edit/'.$value->sales_id;
+			$sales_data[$key]->delete_url ='/inventory/sales/delete/'.$value->sales_id; 
+
 				$sales_return_data = $salesReturnObject->getRecordsBySalesid($value->sales_id);
 				if(count($sales_return_data)>0){
 					$sales_data[$key]->returned_quantity = $sales_return_data[0]->returned_quantity;
@@ -188,17 +192,16 @@ class InventoryController extends Controller
 		$purchase_data=$purchase->getAllPurchase();
 		$itemgroup=new ItemGroup;
 		$itemgroup_data=$itemgroup->getAllItemGroup();
-		$class=new Classes;
-		$class_data=$class->getAllClass();
+	
 		$vendor=new Vendor;
 		$vendor_data=$vendor->getAllVendor();
 		$sales=new Sales;
 		$sales_data=DB::table('tbl_sales')
 						
 						->join('tbl_item_name','tbl_sales.item_name_id','=','tbl_item_name.item_name_id')
-						->join('tbl_student_details','tbl_sales.sold_to','=','tbl_student_details.student_id')
+						
 						->join('tbl_vendor','tbl_sales.vendor_id','=','tbl_vendor.vendor_id')
-						->select('tbl_sales.*','tbl_item_name.item_name','tbl_student_details.student_name','tbl_vendor.name as vendor_name')
+						->select('tbl_sales.*','tbl_item_name.item_name','tbl_vendor.name as vendor_name')
 						->get();
 		foreach ($sales_data as $key => $value) {
 			$sales_return_data = $salesReturnObject->getRecordsBySalesid($value->sales_id);
@@ -210,7 +213,7 @@ class InventoryController extends Controller
 				$sales_data[$key]->returned_price = 0;
 			}
 		}
-		return view('inventory/sales/_list',['sales_data'=>$sales_data,'itemgroup_data'=>$itemgroup_data,'itemname_data'=>$itemname_data, 'vendor_data'=>$vendor_data,'purchase_data'=>$purchase_data,'class_data'=>$class_data]);
+		return view('inventory/sales/_list',['sales_data'=>$sales_data,'itemgroup_data'=>$itemgroup_data,'itemname_data'=>$itemname_data, 'vendor_data'=>$vendor_data,'purchase_data'=>$purchase_data]);
 
 	}
 
@@ -221,11 +224,9 @@ class InventoryController extends Controller
 		$purchase_data=$purchase->getAllPurchase();
 		$itemgroup=new ItemGroup;
 		$itemgroup_data=$itemgroup->getAllItemGroup();
-		$class=new Classes;
-		$class_data=$class->getAllClass();
 		$vendor=new Vendor;
 		$vendor_data=$vendor->getAllVendor();
-		return view('inventory/sales/add',['itemgroup_data'=>$itemgroup_data,'itemname_data'=>$itemname_data, 'vendor_data'=>$vendor_data,'purchase_data'=>$purchase_data,'class_data'=>$class_data]);
+		return view('inventory/sales/add',['itemgroup_data'=>$itemgroup_data,'itemname_data'=>$itemname_data, 'vendor_data'=>$vendor_data,'purchase_data'=>$purchase_data]);
 	}
 
 	public function salesSave(Request $request){
@@ -267,13 +268,12 @@ class InventoryController extends Controller
 		}
 	}
 
-	public function editSales(){
+	public function editSales($id){
 		
 		$sales=new Sales;
-		$sales_data=$sales->getSalesById($param->id);
+		$sales_data=$sales->getSalesById($id);
 		
-		$class=new Classes;
-		$class_data=$class->getAllClass();
+	
 		$itemname=new ItemName;
 		$itemname_data=$itemname->getAllItem();
 
@@ -288,10 +288,10 @@ class InventoryController extends Controller
 		exit;
 	}
 
-	public function deleteSales(){
-		$param=__decryptToken();
+	public function deleteSales($id){
+		
 			$sales=new Sales;
-		$status=$sales->deleteSalesById($param->id);
+		$status=$sales->deleteSalesById($id);
 		if($status){
 			echo $status;
 			exit;
@@ -388,9 +388,9 @@ public function purchaseReturnSave(){
 		$sales_id = explode('-', $item_id)[1];
 		//$salesReturnObject = new SalesReturn;
 		$sales_return_data = DB::table('tbl_sales')->where(['tbl_sales.item_name_id'=>$id,'tbl_sales.month'=>$month])
-			->join('tbl_student_details','tbl_sales.sold_to','=','tbl_student_details.student_id')
+			
 			->join('tbl_vendor','tbl_sales.vendor_id','=','tbl_vendor.vendor_id')
-			->select('tbl_sales.*','tbl_student_details.student_name','tbl_student_details.student_id','tbl_vendor.name as vendor_name')
+			->select('tbl_sales.*','tbl_vendor.name as vendor_name')
 			->get();
 			$final_sales_array = [];
 			foreach($sales_return_data as $key=>$value){

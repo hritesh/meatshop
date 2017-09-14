@@ -21,15 +21,15 @@ class Sales extends  Model{
 		return $this->save();
 	}
 
-	public function getAllSales($school_id){
-		return $this->where('school_id',$school_id)->get();
+	public function getAllSales(){
+		return $this->all();
 	}
 
 	public function getSalesById($id){
 		return $this->where('sales_id',$id)->get();
 	}
-	public function updateSales($id,$school_id,$item_name_id,$quantity,$rate,$price,$sold_to,$status,$description,$vendor_id){
-		return $this->where('sales_id',$id)->update(['school_id'=>$school_id,'item_name_id'=>$item_name_id,'quantity'=>$quantity,'rate'=>$rate,'price'=>$price,'sold_to'=>$sold_to,'status'=>$status,'description'=>$description,'vendor_id'=>$vendor_id]);
+	public function updateSales($id,$item_name_id,$quantity,$rate,$price,$sold_to,$status,$description,$vendor_id){
+		return $this->where('sales_id',$id)->update(['item_name_id'=>$item_name_id,'quantity'=>$quantity,'rate'=>$rate,'price'=>$price,'sold_to'=>$sold_to,'status'=>$status,'description'=>$description,'vendor_id'=>$vendor_id]);
 	}
 	public function deleteSalesById($id){
 		return $this->where('sales_id',$id)->delete();

@@ -14,7 +14,6 @@ class PurchaseReturn extends  Model{
 		$this->rate=$dataArray['rate'];
 		$this->total_price=$dataArray['total_price'];
 		$this->vendor_id=$dataArray['vendor_id'];
-		$this->school_id=$dataArray['school_id'];
 		$this->quantity_returned=$dataArray['quantity_returned'];
 		$this->narration=$dataArray['narration'];
 		$this->purchase_id=$dataArray['purchase_id'];
@@ -22,8 +21,8 @@ class PurchaseReturn extends  Model{
 		return $this->save();
 	}
 
-	public function getAllPurchaseReturn($school_id){
-		return $this->where('school_id',$school_id)->get();
+	public function getAllPurchaseReturn(){
+		return $this->all();
 	}
 
 	public function getPurchaseReturnById($id){
@@ -32,11 +31,11 @@ class PurchaseReturn extends  Model{
 
 
 	public function updateRecords($dataArray){
-		return $this->where(['school_id'=>$dataArray['school_id'],'item_name_id'=>$dataArray['item_name_id'],'total_quantity_purchased'=>$dataArray['total_quantity_purchased'],'rate'=>$dataArray['rate'],'vendor_id'=>$dataArray['vendor_id'],'purchase_id'=>$dataArray['purchase_id']])->update(['quantity_returned'=>$dataArray['quantity_returned'],'total_price'=>$dataArray['total_price'],'narration'=>$dataArray['narration']]);
+		return $this->where(['item_name_id'=>$dataArray['item_name_id'],'total_quantity_purchased'=>$dataArray['total_quantity_purchased'],'rate'=>$dataArray['rate'],'vendor_id'=>$dataArray['vendor_id'],'purchase_id'=>$dataArray['purchase_id']])->update(['quantity_returned'=>$dataArray['quantity_returned'],'total_price'=>$dataArray['total_price'],'narration'=>$dataArray['narration']]);
 	}
-	public function getPurchaseRecords($school_id,$purchase_id,$item_name_id,$total_quantity_purchased,$rate,$vendor_id,$month){
+	public function getPurchaseRecords($purchase_id,$item_name_id,$total_quantity_purchased,$rate,$vendor_id,$month){
 
-		$data = $this->where(['school_id'=>$school_id,'purchase_id'=>$purchase_id,'item_name_id'=>$item_name_id,'total_quantity_purchased'=>$total_quantity_purchased,'rate'=>$rate,'vendor_id'=>$vendor_id,'month'=>$month])->get();
+		$data = $this->where(['purchase_id'=>$purchase_id,'item_name_id'=>$item_name_id,'total_quantity_purchased'=>$total_quantity_purchased,'rate'=>$rate,'vendor_id'=>$vendor_id,'month'=>$month])->get();
 		return $data;
 	}
 

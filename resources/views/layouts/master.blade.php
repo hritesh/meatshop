@@ -328,7 +328,7 @@
                                     <a href="#">Purchase Return<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                            <a href="/inventory/itemname/_list">List</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -337,7 +337,7 @@
                                     <a href="#">Sales<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                            <a href="/inventory/sales/_list">List</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
@@ -346,7 +346,7 @@
                                     <a href="#">Sales Return<span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="/inventory/itemname/_list">ItemName</a>
+                                            <a href="/inventory/sales/return">List</a>
                                         </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
