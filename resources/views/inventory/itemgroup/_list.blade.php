@@ -1,14 +1,6 @@
 @extends('layouts.master')
-@section('content')
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Inventory-ItemGroup</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <form id="frmAjaxSender"  class="form-horizontal" >
+@section('form-content')
+    <form id="frmAjaxSender"  class="form-horizontal" >
                     {{csrf_field()}}
                         <div class="span12">
                           <div class="span3">
@@ -30,20 +22,10 @@
                         <button class="btn btn-success" type="button" onclick="saveItem($('#hdnActionType').val())" style="margin: 0px !important;">Save</button>
                         </div>
                         </div>
-                     </form>        
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Kitchen Sink
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
+                     </form>       
+@stop
+@section('table-content')          
+           
                                 <table id="tblItemList" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -63,8 +45,8 @@
                                  
                                   
                                   <td class="all-icons">
-                                      <a onclick="editItem('<?php echo '/inventory/itemgroup/edit/'.$item->item_group_id?>');">Edit</a>
-                                    <a type="select"   onclick="deleteItem('<?php echo '/inventory/itemgroup/delete/'.$item->item_group_id?>');"  title="delete">
+                                      <a  class="btn btn-primary" onclick="editItem('<?php echo '/inventory/itemgroup/edit/'.$item->item_group_id?>');">Edit</a>
+                                    <a type="select" class="btn btn-danger" onclick="deleteItem('<?php echo '/inventory/itemgroup/delete/'.$item->item_group_id?>');"  title="delete">
                                             Delete
                                           </a>
                                    </td> 
@@ -74,15 +56,7 @@
            <?php $i++;} ?>
                                     </tbody>
                                 </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+                            
             <script type="text/javascript">
         $(document).ready(function(){
             $('#tblItemList').DataTable({

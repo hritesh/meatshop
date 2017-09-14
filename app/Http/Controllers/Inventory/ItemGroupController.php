@@ -18,7 +18,7 @@ class ItemGroupController extends Controller{
 	public function _list(){
 		$itemgroup=new ItemGroup;
 		$itemgroup_data=$itemgroup->getAllItemGroup();
-		return view('inventory/itemgroup/_list',['itemgroup_data'=>$itemgroup_data]);
+		return view('inventory/itemgroup/_list',['itemgroup_data'=>$itemgroup_data,'pageTitle'=>'Inventory-Itemgroup','tableTitle'=>'ItemGroups']);
 
 	}
 	public function  itemGroupListJson(){

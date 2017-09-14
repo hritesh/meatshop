@@ -1,69 +1,51 @@
 @extends('layouts.master')
 
-@section('content')
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Sales</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
+@section('form-content')
+           
            <form id="frmAjaxSender">
              
-              <div class="span12">
-      
-                  
-                  <div class="span3">
-                <label class="span4">Month </label>
-                <div class="span8">
+              <div class="col-sm-12">
+                <div class="col-sm-4 form-group">
+                <label class="">Month </label>
                    <select id="ddlMonth" name="month">
                      <option>--Select Month--</option>
                      @foreach(getMonthArray() as $key=>$val)
                       <option value="{{$key}}">{{$val}}</option>
                      @endforeach
                    </select>
-                </div>
               </div>
 
               
 
 
 
-                <div class="span3">
-                <label class="span4">Item </label>
-                <div class="span8">
+                <div class="col-sm-4 form-group">
+                <label class="">Item </label>
                   <select name="item_name_id" id="selItem" required>
                     <option value=""></option>
                    <?php   foreach($itemname_data as $item){ ?>
                       <option value="{{$item->item_name_id}}">{{$item->item_name}}</option>
                    <?php } ?>
                   </select>
-                  
-                </div>
               </div>
 
-              <div class="span3">
-                <label class="span4">Quantity</label>
-                <div class="span8">
+              <div class="col-sm-4 form-group">
+                <label class="">Quantity</label>
                   <input type="text" name="quantity" required id="quantity" placeholder="Enter quantity" class="span12 m-wrap" >
-                </div>
               </div>
+            </div>
+            <div class="col-sm-12">
 
-                 <div class="span3">
-                <label class="span4">Total Price </label>
-                <div class="span8">
+                <div class="col-sm-4 form-group">
+                <label class="">Total Price </label>
                   <input type="text" name="price" id="price"  placeholder="Enter price" class="span12 m-wrap" required>
-                </div>
 
               </div>
 
-                <div class="span3">
-                <label class="span3">Sold To </label>
-                <div class="span8">
+              <div class="col-sm-4 form-group">
+                <label class="">Sold To </label>
                  <input type="text" name="sold_to" id="sold_to"  placeholder="Enter name" class="span12 m-wrap" required>
-                  </select>
-                </div>
+                </select>
               </div>
 
 
@@ -73,45 +55,32 @@
                
            
             
-                 <div class="span12">
-              <div class="span11">
+                 
+              <div class="col-sm-4 form-group">
                 <label class="span1">Narration </label>
-                <div class="span8">
+                <div class="">
                    <textarea type="text"  name="description" id="description" class="span12 m-wrap" required></textarea>
                 </div>
               </div>
 
-             
-              </div>
-
               <div class="span12" style="margin-top:10px !important">
                 <div class="span6">
-                <label class="span3">Sales Returned ?</label>
+                <label class="">Sales Returned ?</label>
                 <div class="span2">
                   <input type="checkbox" name="status" id="status"  class="span5 m-wrap"  >
                 </div>
               </div>
               </div>
 
-                    <div class="span3">
+                    <div class="">
                         <input type="hidden" id="hdnActionType" value="add">
                         <button class="btn btn-success" type="button" onclick="saveSales($('#hdnActionType').val())" style="margin: 0px !important;">Save</button>
                         </div>
                         </div>
             </form>
-              </div>
-                <!-- /.col-lg-12 -->
-            </div>
+@stop
+@section('table-content')
 
-  <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
                                 <table id="tblSalesList" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -158,15 +127,6 @@
            <?php $i++;} ?>
                                     </tbody>
                                 </table>
-                            </div>
-                            
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
 
 
 
@@ -353,7 +313,7 @@ $(document).ready(function(){
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $('#tblVendorList').DataTable({
+            $('#tblSalesList').DataTable({
                 responsive: true
             });
         });

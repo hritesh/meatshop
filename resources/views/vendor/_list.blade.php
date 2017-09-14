@@ -1,86 +1,51 @@
 @extends('layouts.master')
-@section('content')
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Vendor</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
+@section('form-content')
             <form id="frmAjaxSender">
         
-            <div class="span12">
+            <div class="col-sm-12">
               
-              <div class="span4">
-                <label class="span4">Company Name</label>
-                <div class="span8">
+              <div class="col-sm-4 form-group">
+                <label>Company Name</label>
                   <input type="text" name="name" id="name" required  placeholder="Enter company name" class="span12 m-wrap" >
-                </div>
               </div>
 
-              <div class="span4">
-                <label class="span4">Address </label>
-                <div class="span8">
+              <div class="col-sm-4 form-group">
+                <label>Address </label>
                   <input type="text" name="address" id="address" required placeholder="Enter address" class="span12 m-wrap" required>
-                </div>
               </div>
 
-               <div class="span4">
-                <label class="span4">Email </label>
-                <div class="span8">
+               <div class="col-sm-4 form-group">
+                <label >Email </label>
                   <input type="email" name="email"  id="email" placeholder="Enter email" class="span12 m-wrap" required>
                 </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="col-sm-4 form-group">
+              <label>Contact Name </label>
+              
+                <input type="text" name="p_name" id="p_name" required  placeholder="Enter contact person name" class="span12 m-wrap" >
               </div>
-
               
 
-
-           
-
-                <div class="span4">
-                <label class="span4">Contact Name </label>
-                <div class="span8">
-                  <input type="text" name="p_name" id="p_name" required  placeholder="Enter contact person name" class="span12 m-wrap" >
-                </div>
-              </div>
-
-              <div class="span4">
-                  <label class="span4">Contact No </label>
-                <div class="span8">
+              <div class="col-sm-4 form-group">
+                  <label >Contact No </label>
                   <input type="text" name="contact"  id="contact" placeholder="Enter phone no" class="span12 m-wrap" required>
-                </div>
               </div>
 
-              <div class="span4">
-                <label class="span4">Phone No </label>
-                <div class="span8">
+              <div class="col-sm-4 form-group">
+                <label >Phone No </label>
                   <input type="text" name="phone" id="phone"  placeholder="Enter contact person phone" class="span12 m-wrap" required>
-                </div>
               </div>
-
-            
-          
-                      <div class="span3">
+            </div>
+            <div class="col-sm-12 form-group">
                         <input type="hidden" id="hdnActionType" value="add">
                         <button class="btn btn-success" type="button" onclick="saveVendor($('#hdnActionType').val())" style="margin: 0px !important;">Save</button>
                         </div>
-                        </div>
 
-                     </form>        
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+                     </form>
+@stop
+@section('table-content')
 
-             <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
                                 <table id="tblVendorList" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -122,15 +87,7 @@
            <?php $i++;} ?>
                                     </tbody>
                                 </table>
-                            </div>
                             
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
             <script type="text/javascript">
         $(document).ready(function(){
             $('#tblVendorList').DataTable({

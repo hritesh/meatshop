@@ -1,19 +1,7 @@
 
  @extends('layouts.master')
-@section('content')
-  <div class="row-fluid">
-    <div class="span12">
-      <div class="widget-box">
-        <div class="widget-title widget-form-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-          <h5>Stock List</h5>
-          
-        </div>
-        <div class="widget-content">
-          @foreach($errors->all() as $err)
-            <div class="alert alert-danger">
-              {{$err}}
-            </div>
-          @endforeach
+@section('form-content')
+  
            
           
          <form method="post" action="<?php echo '/inventory/stock/get'?>">
@@ -48,7 +36,8 @@
             </div>
             
           </form>
-            <div style="clear:both"></div>
+@stop
+@section('table-content')
         </div>
         </div>
           <?php if(isset($stock_data)){ ?>

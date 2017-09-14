@@ -15,7 +15,7 @@ class VendorController extends Controller{
 	public function _list(){
 		$vendor=new Vendor;
 		$vendor_data=$vendor->getAllVendor();
-		return view('vendor/_list',['vendor_data'=>$vendor_data]);
+		return view('vendor/_list',['vendor_data'=>$vendor_data,'pageTitle'=>'Vendor','tableTitle'=>'Vendor List']);
 	}
 	public function vendorListJson(){
 		$vendor=new Vendor;

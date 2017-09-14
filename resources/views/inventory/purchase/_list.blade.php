@@ -1,141 +1,82 @@
 @extends('layouts.master')
 
-@section('content')
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Purchase</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
+@section('form-content')
+            
 
               <form id="frmAjaxSender">
-  
-              <div class="span12">
-                
-                <div class="span4">
-                <label class="span3">Item </label>
-                  <div class="span7">
-                      <select name="item_name_id" id="selItem" required>
+                <div class="col-sm-12">
+                  <div class="col-sm-3 form-group">
+                    <label>Select Item</label>
+                    <select name="item_name_id" id="selItem" required>
                           <option value="">  </option>
                               <?php   foreach($itemname_data as $item){ ?>
                                  <option value="{{$item->item_name_id}}">{{$item->item_name}}</option>
                               <?php } ?>
                       </select>
-                  
                   </div>
-
-                  <!-- <div class="span4">
-                      <a id="filter" class="btn btn-success" style="margin-top: 0px"> Add Item
-                      </a>
-                  </div> -->
+                  <div class="col-sm-3 form-group">
+                    <label>Quantity</label>
+                    <input type="text" name="quantity" id="quantity" required placeholder="Enter quantity" class="span12 m-wrap" style="padding-left: 0px !important">
+                  </div>
+                  <div class="col-sm-3 form-group">
+                    <label>Unit Cost</label>
+                    <input type="text" name="rate" id="rate" placeholder="Enter rate per piece" class="span12 m-wrap" required style="padding-left: 0px !important">
+                  </div>
+                  <div class="col-sm-3 form-group">
+                    <label>Price</label>
+                    <input type="text" readonly="true" name="price" id="price"   class="span12 m-wrap" required>
+                  </div>
                 </div>
-
-              <div class="span5">
-                <label class="span3">Quantity</label>
-                <div class="span7">
-                  <input type="text" name="quantity" id="quantity" required placeholder="Enter quantity" class="span12 m-wrap" style="padding-left: 0px !important">
-                </div>
-              </div>
-
-              <div class="span3">
-                <label class="span4">Unit Cost </label>
-                <div class="span8">
-                  <input type="text" name="rate" id="rate" placeholder="Enter rate per piece" class="span12 m-wrap" required style="padding-left: 0px !important">
-                </div>
-              </div>
-
-              
-
-            
-              
-
-                    <div class="span4">
-                        <label class="span3">Price </label>
-                          <div class="span7">
-                            <input type="text" readonly="true" name="price" id="price"   class="span12 m-wrap" required>
-                          </div>
-                    </div>
-
-                    <div class="span5">
-                      <label class="span3">Selling Price </label>
-                        <div class="span7">
-                            <input type="text" name="sell_price" id="sell_price"  placeholder="Enter selling price" class="span12 m-wrap" required style="padding-left: 0px !important">
-                        </div>
-                    </div>
-
-                    <div class="span3">
-                        <label class="span4">Vendor </label>
-                             <div class="span8">
-                                <select name="vendor_id" id="vendor_id" required>
-                                  <option value=""></option>
-                                      <?php   foreach($vendor_data as $vendor){ ?>
-                                       <option value="{{$vendor->vendor_id}}">{{$vendor->name}}</option>
-                                      <?php } ?>
-                                </select>
-                  
-                              </div>
-
-                             <!--  <div  class="span4">
-                          
-                              <a id="filterVendor" class="pull-right btn btn-success"> Add vendor
-                              </a>
-         
-                          </div> -->
-                    </div>
-                          
-                  
-
-              <div class="span6">
-                <label class="span2">Narration </label>
-                <div class="span10">
-                   <textarea type="text" id="description" required  name="description" class="span12 m-wrap"></textarea>
-                </div>
-              </div>
-
-              <div class="span6">
-                <label class="span2">Month </label>
-                <div class="span6">
-                   <select id="ddlMonth" name="month">
+                <div class="col-sm-12">
+                  <div class="col-sm-4 form-group">
+                    <label>Selling Price</label>
+                    <input type="text" name="sell_price" id="sell_price"  placeholder="Enter selling price" class="span12 m-wrap" required style="padding-left: 0px !important">
+                  </div>
+                  <div class="col-sm-4 form-group">
+                    <label>Vendor</label>
+                    <select name="vendor_id" id="vendor_id" required>
+                      <option value=""></option>
+                          <?php   foreach($vendor_data as $vendor){ ?>
+                           <option value="{{$vendor->vendor_id}}">{{$vendor->name}}</option>
+                          <?php } ?>
+                    </select>
+                  </div>
+                  <div class="col-sm-4 form-group">
+                    <label>Month</label>
+                    <select id="ddlMonth" name="month">
                      <option>--Select Month--</option>
                      @foreach(getMonthArray() as $key=>$val)
                       <option value="{{$key}}">{{$val}}</option>
                      @endforeach
                    </select>
+                  </div>
+                  <!--  <div  class="span4">
+                          
+                              <a id="filterVendor" class="pull-right btn btn-success"> Add vendor
+                              </a>
+         
+                        </div> -->  
                 </div>
-              </div>
-
-              
-
-           
-                <div class="span6">
-                <label class="span2">Purchase Returned ?</label>
-                <div class="span2">
-                  <input type="checkbox" name="status" id="status"  class="span4 m-wrap"  >
-                </div>
-              </div>
-
-              <div class="span3">
-                        <input type="hidden" id="hdnActionType" value="add">
-                        <button class="btn btn-success" type="button" onclick="savePurchase($('#hdnActionType').val())" style="margin: 0px !important;">Save</button>
-                        </div>
-                        </div>
-                    </form>
-                      </div>
-                        <!-- /.col-lg-12 -->
+                <div class="col-sm-12">
+                  <div class="col-sm-6 form-group">
+                    <label>Narration</label>
+                    <textarea type="text" id="description" required  name="description" class="span12 m-wrap"></textarea>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="col-sm-3">
+                      <label>Purchase Returned</label>
+                      <input type="checkbox" name="status" id="status"  class="span4 m-wrap"  >   
                     </div>
+                    <div class="col-sm-3">
+                      <input type="hidden" id="hdnActionType" value="add">
+                        <button class="btn btn-success" type="button" onclick="savePurchase($('#hdnActionType').val())" style="margin: 0px !important;">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+@stop
+@section('table-content')
 
-
-<div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
                                 <table id="tblPurchaseList" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -170,8 +111,8 @@
                                   
                                   <td class="all-icons">
                                       
-                                      <a onclick="editPurchase('<?php echo '/inventory/purchase/edit/'.$purchase->purchase_id?>');">Edit</a>
-                                    <a type="select"   onclick="deletePurchase('<?php echo '/inventory/purchase/delete/'.$purchase->purchase_id?>');"  title="delete">
+                                      <a type="select" class="btn btn-primary" onclick="editPurchase('<?php echo '/inventory/purchase/edit/'.$purchase->purchase_id?>');">Edit</a>
+                                    <a type="select" class="btn btn-danger"  onclick="deletePurchase('<?php echo '/inventory/purchase/delete/'.$purchase->purchase_id?>');"  title="delete">
                                             Delete
                                           </a>
                                    </td> 
@@ -181,19 +122,18 @@
            <?php $i++;} ?>
                                     </tbody>
                                 </table>
-                            </div>
                             
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
 
 
 
-
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('#tblPurchaseList').DataTable({
+                responsive: true
+            });
+        });
+            
+</script>
  <script>
             function editPurchase(url){
                 $.get(url,function(result){

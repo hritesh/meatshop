@@ -452,7 +452,40 @@
         </nav>
 
         <div id="page-wrapper">
-            @yield('content')
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">{{$pageTitle}}</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="panel panel-primary">
+                  <div class="panel-body">
+            @yield('form-content')
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            {{$tableTitle}}
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+            @yield('table-content')
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
         </div>
         <!-- /#page-wrapper -->
 

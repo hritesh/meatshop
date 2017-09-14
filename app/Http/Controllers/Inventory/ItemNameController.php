@@ -38,7 +38,7 @@ class ItemNameController extends Controller{
 		$itemname_data = DB::table('tbl_item_name')->join('tbl_item_group','tbl_item_name.item_group_id','=','tbl_item_group.item_group_id')
 		->select('tbl_item_name.*','tbl_item_group.category')->get();
 
-		return view('inventory/itemname/_list',['itemname_data'=>$itemname_data,'itemgroup_data'=>$itemgroup_data]);
+		return view('inventory/itemname/_list',['itemname_data'=>$itemname_data,'itemgroup_data'=>$itemgroup_data,'pageTitle'=>'Inventory-ItemName','tableTitle'=>'ItemNames']);
 	}
 	
 	public function add(){

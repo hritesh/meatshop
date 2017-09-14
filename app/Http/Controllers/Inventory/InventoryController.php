@@ -73,7 +73,7 @@ class InventoryController extends Controller
 				$purchase_data[$key]->returned_price = 0;
 			}
 		}
-		return view('inventory/purchase/_list',['purchase_data'=>$purchase_data,'itemGroup_data'=>$itemGroup_data,'itemname_data'=>$itemname_data, 'vendor_data'=>$vendor_data]);
+		return view('inventory/purchase/_list',['purchase_data'=>$purchase_data,'itemGroup_data'=>$itemGroup_data,'itemname_data'=>$itemname_data, 'vendor_data'=>$vendor_data,'pageTitle'=>'Purchase','tableTitle'=>'PurchaseList']);
 	}
 
 	public function addPurchase(){
@@ -213,7 +213,7 @@ class InventoryController extends Controller
 				$sales_data[$key]->returned_price = 0;
 			}
 		}
-		return view('inventory/sales/_list',['sales_data'=>$sales_data,'itemgroup_data'=>$itemgroup_data,'itemname_data'=>$itemname_data, 'vendor_data'=>$vendor_data,'purchase_data'=>$purchase_data]);
+		return view('inventory/sales/_list',['sales_data'=>$sales_data,'itemgroup_data'=>$itemgroup_data,'itemname_data'=>$itemname_data, 'vendor_data'=>$vendor_data,'purchase_data'=>$purchase_data,'pageTitle'=>'Sales','tableTitle'=>'Sales List']);
 
 	}
 
@@ -312,7 +312,7 @@ class InventoryController extends Controller
 						->join('tbl_item_name','tbl_purchase.item_name_id','=','tbl_item_name.item_name_id')
 						->select('tbl_purchase.*','tbl_item_name.item_name')
 						->get();
-		return view('inventory/purchase_return/_list',['purchase_data'=>$purchase_data]);
+		return view('inventory/purchase_return/_list',['purchase_data'=>$purchase_data,'pageTitle'=>'PurchaseReturn','tableTitle'=>'PurchaseReturnList']);
 
 	}
 		public function purchaseReturnList($item_name_id,$month){
@@ -379,7 +379,7 @@ public function purchaseReturnSave(){
 						
 						->select('tbl_sales.*','tbl_item_name.item_name')
 						->get();
-		return view('inventory/sales_return/_list',['sold_data'=>$sales_data]);
+		return view('inventory/sales_return/_list',['sold_data'=>$sales_data,'pageTitle'=>'Sales Return','tableTitle'=>'Sales Return List']);
 
 	}
 
@@ -447,7 +447,7 @@ public function purchaseReturnSave(){
 		$vendor = new Vendor;
 		$vendor_data = $vendor->getAllVendor();
 		
-		return view('inventory/stock/_list',['vendor_data'=>$vendor_data]);
+		return view('inventory/stock/_list',['vendor_data'=>$vendor_data,'pageTitle'=>'Stock','tableTitle'=>'Stock List']);
 	}
 	public function stockList(Request $request){
 			/*$stock=new Stock;
@@ -524,6 +524,6 @@ public function purchaseReturnSave(){
 			}
 			$vendor = new Vendor;
 		$vendor_data = $vendor->getAllVendor();
-			return view('inventory/stock/_list',['stock_data'=>$items_array,'vendor_data'=>$vendor_data,'stock_vendor_id'=>$request->vendor_id]);
+			return view('inventory/stock/_list',['stock_data'=>$items_array,'vendor_data'=>$vendor_data,'stock_vendor_id'=>$request->vendor_id,'pageTitle'=>'Stock','tableTitle'=>'Stock List']);
 	}
 }

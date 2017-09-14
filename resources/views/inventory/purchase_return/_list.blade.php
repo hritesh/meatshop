@@ -1,57 +1,31 @@
  @extends('layouts.master')
-@section('content')
-  <div class="row-fluid">
-    <div class="span12">
-      <div class="widget-box">
-        <div class="widget-title widget-form-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-          <h5>Purchase Return</h5>
-          
-        </div>
-        <div class="widget-content">
-          @foreach($errors->all() as $err)
-            <div class="alert alert-danger">
-              {{$err}}
-            </div>
-          @endforeach
-           
-          
-         
-            <div class="span4">
-              
-                <label class="span2">Item </label>
-                <div class="span8">
-                  <select name="teacher_id" id="ddlItem" >
-                    <option value="">--Select Item--</option>
-                   <?php   foreach($purchase_data as $item){ ?>
-                      <option value="{{$item->item_name_id}}-{{$item->purchase_id}}">{{$item->item_name}}</option>
-                   <?php } ?>
-                  </select>
-                  
-                </div>
-              
-            </div>
+@section('form-content')
+<form>
+    <div class="col-sm-12">
+      <div class="col-sm-4 form-group">
+        <label>Item </label>
+        <select name="teacher_id" id="ddlItem" >
+          <option value="">--Select Item--</option>
+         <?php   foreach($purchase_data as $item){ ?>
+            <option value="{{$item->item_name_id}}-{{$item->purchase_id}}">{{$item->item_name}}</option>
+         <?php } ?>
+        </select>
+      </div>
+      <div class="col-sm-4 form-group">
+        <label>Month </label>
+        <select id="ddlMonth"  onchange="loadGradeList();">
+           <option>--Select Month--</option>
+           @foreach(getMonthArray() as $key=>$val)
+            <option value="{{$key}}">{{$val}}</option>
+           @endforeach
+         </select>
 
-            <div class="span4">
-                <label class="span2">Month </label>
-                <div class="span8">
-                   <select id="ddlMonth"  onchange="loadGradeList();">
-                     <option>--Select Month--</option>
-                     @foreach(getMonthArray() as $key=>$val)
-                      <option value="{{$key}}">{{$val}}</option>
-                     @endforeach
-                   </select>
-                </div>
-              </div>
-            
-            
-                  
-           
-            
-            
-            <div style="clear:both"></div>
-        </div>
-        </div>
+      </div>
+    </div>
+  </form>
+@stop
 
+@section('table-content')
             <table id="tblStudentFeeList" class="table table-bordered table-striped filter-results">
               <tr>
                 <td style="text-align:center;">0 Record Found.</td>
@@ -61,9 +35,8 @@
                 <button style="margin-bottom:20px;" class="btn btn-success pull-right" type="button" onclick="assignGrade();">Save All</button>
             </div>
 
-      </div>
-    </div>
-  </div>
+
+ 
   <script type="text/javascript">
   function assignGrade(){
     APP.showLoading();
@@ -113,6 +86,7 @@
           $('#tblStudentFeeList').html('<tr><td style="text-align:center;">0 Record Found.</td></tr>');
           return false;
         }
+        
         html+='<tr>';
 
         html+='<td class="filter-table" style="text-align:center;"><b>Rate</td>';
